@@ -9,12 +9,8 @@ const Navbar = async () => {
   const session = await getServerSession(authOptions);
   return (
     <NavbarProvider>
-        {/* logo */}
       <NavbarLogo/>
-        {/* search bar */}
         <SearchBar />
-
-        {/* actions */}
         <div className=' flex space-x-6 justify-center'>
         {session?.user ? (
           <>
@@ -23,8 +19,7 @@ const Navbar = async () => {
          </>
          ) : (
           <NavbarButton/>)}
-          {/* @ts-expect-error react component */}
-          <Notification />
+          {/* <Notification /> */}
           <NightComponent />
 
       </div>
