@@ -3,7 +3,7 @@ import { User,Post,Subscription,Subreddit } from "@prisma/client"
 import type { Session } from 'next-auth'
 interface ProfileInfoProps {
   Profile: (User & {
-    Post: Post[];
+    posts: Post[];
     subscriptions: Subscription[];
     createdSubreddits: Subreddit[];
 }) | null
