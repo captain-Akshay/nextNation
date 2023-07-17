@@ -5,7 +5,7 @@ import axios from "axios";
 async function Notification({}){
   const session = await getAuthSession();
   const {data}= await axios.get('http://localhost:3000/api/friendsrequestgot');
-  return (<>{session&& <BellNotification data={data}/>}</>)
+  return (<div>{session? <BellNotification data={data}/>:""}</div>)
 }
 
 export default Notification;
