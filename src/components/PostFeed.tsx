@@ -51,7 +51,6 @@ const PostFeed: FC<PostFeedProps> = ({ initialPosts, subredditName }) => {
   const posts = data?.pages.flatMap((page) => page) ?? initialPosts
 
   return (
-    <div>
     <ul className='flex flex-col col-span-2 space-y-6'>
       {posts.map((post, index) => {
         const votesAmt = post.votes.reduce((acc, vote) => {
@@ -97,7 +96,6 @@ const PostFeed: FC<PostFeedProps> = ({ initialPosts, subredditName }) => {
         </li>
       )}
     </ul>
-    </div>
   )
 }
 
