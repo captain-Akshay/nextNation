@@ -14,20 +14,13 @@ export default function RProvider({subreddit,memberCount,slug,children,session,i
     isSubscribed:boolean,
     session:any,
   }){
-    const { theme, setTheme } = useTheme();
+    const { theme } = useTheme();
 
     // Set colors based on the current theme
     const textColor = theme === 'dark' ? 'text-white' : 'text-black';
     const bgColor = theme === 'dark' ? 'bg-black' : 'bg-white';
     const borderColor = theme === 'dark' ? 'border-white' : 'border-black';
-  
-    // Use useEffect to update the theme dynamically
-    useEffect(() => {
-      setTheme(theme!);
-    }, []);
-    if(localStorage.getItem("theme")){
-      setTheme(localStorage.getItem("theme")!)
-    }
+
     return(<div className={`sm:container max-w-7xl mx-auto h-full pt-12 ${bgColor}`}>
     <div>
       <ToFeedButton />

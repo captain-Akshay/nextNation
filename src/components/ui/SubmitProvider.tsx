@@ -7,16 +7,10 @@ interface PageProps {
   }
 
 const SubmitProvider = ({slug}:PageProps) => {
-    const { theme, setTheme } = useTheme();
-
+    const { theme } = useTheme();
   // Set colors based on the current theme
   const textColor = theme === 'dark' ? 'text-white' : 'text-black';
   const borderColor = theme === 'dark' ? 'border-gray-700' : 'border-gray-200';
-
-  // Use useEffect to update the theme dynamically
-  useEffect(() => {
-    setTheme(theme!);
-  }, [theme, setTheme]);
 
   return(      <div className={`border-b ${borderColor} pb-5`}>
   <div className='-ml-2 -mt-2 flex flex-wrap items-baseline'>

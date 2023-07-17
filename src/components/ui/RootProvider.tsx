@@ -6,10 +6,7 @@ import Link from 'next/link';
 import { buttonVariants } from '@/components/ui/Button';
 
 export default function RootProvider() {
-  const { theme, setTheme } = useTheme();
-  if(localStorage.getItem("theme")){
-    setTheme(localStorage.getItem("theme")!)
-  }
+  const { theme } = useTheme();
   const bgColor = theme === 'dark' ? 'bg-gray-800' : 'bg-emerald-100';
   const textColor = theme === 'dark' ? 'text-white' : 'text-zinc-500';
   const hoverBgColor = theme === 'dark' ? 'bg-gray-700' : 'bg-emerald-500';

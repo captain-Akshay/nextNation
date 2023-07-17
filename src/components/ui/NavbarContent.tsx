@@ -23,15 +23,7 @@ export function NavbarLogo() {
 
 //------------------------SIGN_BUTTON---------------------------
 export function NavbarButton() {
-    const { theme, setTheme } = useTheme();
-  
-    useEffect(() => {
-      // Retrieve the theme from local storage or other source
-      const storedTheme = localStorage.getItem('theme');
-      if (storedTheme) {
-        setTheme(storedTheme);
-      }
-    }, []);
+    const { theme } = useTheme();
   
     const buttonClasses = `${buttonVariants()} ${
       theme === 'dark' ? 'border-white' : 'border-zinc-300'
@@ -47,16 +39,7 @@ export function NavbarButton() {
   }
 //------------------------PROVIDER---------------------------
 export function NavbarProvider({ children }: { children: React.ReactNode }) {
-    const { theme, setTheme } = useTheme();
-  
-    useEffect(() => {
-      // Retrieve the theme from local storage or other source
-      const storedTheme = localStorage.getItem('theme');
-      if (storedTheme) {
-        setTheme(storedTheme);
-      }
-    }, []);
-  
+    const { theme } = useTheme();
     return (
       <div
         className={`fixed top-0 inset-x-0 h-fit ${
