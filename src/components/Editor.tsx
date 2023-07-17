@@ -207,6 +207,7 @@ export const Editor: React.FC<EditorProps> = ({ subredditId }) => {
           <TextareaAutosize
             ref={(e) => {
               titleRef(e);
+              // @ts-ignore
               _titleRef.current = e as HTMLTextAreaElement;
             }}
             {...rest}
