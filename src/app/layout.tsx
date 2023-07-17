@@ -28,7 +28,6 @@ export default function RootLayout({
         <ThemePro>
           <Providers>
           <HomeProvider>
-            {/* @ts-expect-error react component*/}
         {/* <Navbar/> */}
         <div className='container max-w-7xl mx-auto py-5'>
         {children}
