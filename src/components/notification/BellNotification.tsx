@@ -16,18 +16,17 @@ interface BellNotificationProps {
 
 function BellNotification({data}:BellNotificationProps){
     return (
-      <></>
-      // <DropdownMenu>
-      //   <DropdownMenuTrigger asChild>
-      //     {data?.length===0?<Bell />:<BellRing />}
-      //   </DropdownMenuTrigger>
-      //   <DropdownMenuContent className=" w-80">
-      //     <DropdownMenuLabel>Friends Request</DropdownMenuLabel>
-      //     <DropdownMenuSeparator />
-      //     {/* <FriendRequestList data={data}>
-      //       </FriendRequestList> */}
-      //     </DropdownMenuContent>
-      // </DropdownMenu>
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          {data?.length===0?<Bell />:<BellRing />}
+        </DropdownMenuTrigger>
+        <DropdownMenuContent className=" w-80">
+          <DropdownMenuLabel>Friends Request</DropdownMenuLabel>
+          <DropdownMenuSeparator />
+          <FriendRequestList data={data}>
+            </FriendRequestList>
+          </DropdownMenuContent>
+      </DropdownMenu>
     )
 }
 
