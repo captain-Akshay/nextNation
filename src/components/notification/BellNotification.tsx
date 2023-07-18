@@ -1,3 +1,4 @@
+"use client"
 import { Bell,BellRing } from "lucide-react"
 import {
   DropdownMenu,
