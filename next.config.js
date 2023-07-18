@@ -5,6 +5,7 @@ const nextConfig = {
       "uploadthing.com",
       "lh3.googleusercontent.com",
       "avatars.githubusercontent.com",
+      "images.unsplash.com",
     ],
   },
   experimental: {

@@ -23,19 +23,13 @@ interface EditorProps {
 }
 
 export const Editor: React.FC<EditorProps> = ({ subredditId }) => {
-  const { theme, setTheme } = useTheme();
-
+  const { theme } = useTheme();
   // Set colors based on the current theme
   const bgColor = theme === 'dark' ? 'bg-gray-900' : 'bg-zinc-50';
   const borderColor = theme === 'dark' ? 'border-gray-700' : 'border-zinc-200';
   const textColor = theme === 'dark' ? 'text-white' : 'text-black';
   const menuBgColor = theme === 'dark' ? 'bg-gray-800' : 'bg-white';
   const menuTextColor = theme === 'dark' ? 'text-white' : 'text-black';
-
-
-  useEffect(() => {
-    setTheme(theme!);
-  }, [theme, setTheme]);
   const {
     register,
     handleSubmit,

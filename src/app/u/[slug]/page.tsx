@@ -19,7 +19,7 @@ async function page({params}:ProfileProps){
       username: params.slug,
     },
     include: {
-      posts:true,
+      Post:true,
       subscriptions:true,
       createdSubreddits:true,
     },

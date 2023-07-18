@@ -54,12 +54,12 @@ model User {
 
   username String? @unique
 
-  image        String?
-  accounts     Account[]
-  sessions     Session[]
-  posts        Post[]
-  comments     Comment[]
-  commentVotes CommentVote[]
+  image       String?
+  accounts    Account[]
+  sessions    Session[]
+  Post        Post[]
+  Comment     Comment[]
+  CommentVote CommentVote[]
 }
 
 model Subreddit {

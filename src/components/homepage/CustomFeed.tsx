@@ -18,7 +18,6 @@ const CustomFeed = async () => {
       subreddit: true,
     },
   })
-
   const posts = await db.post.findMany({
     where: {
       subreddit: {

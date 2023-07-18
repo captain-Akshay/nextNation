@@ -3,12 +3,13 @@ import { User,Post,Subscription,Subreddit } from "@prisma/client"
 import type { Session } from 'next-auth'
 interface ProfileInfoProps {
   Profile: (User & {
-    posts: Post[];
+    Post: Post[];
     subscriptions: Subscription[];
     createdSubreddits: Subreddit[];
 }) | null
 session?:Session |null
 }
+// Type 'User & { Post: Post[]; subscriptions: Subscription[]; createdSubreddits: Subreddit[]; }' 
 
 import * as React from "react"
 import { Icons } from "../Icon";

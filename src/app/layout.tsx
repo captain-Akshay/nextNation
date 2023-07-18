@@ -28,7 +28,9 @@ export default function RootLayout({
         <ThemePro>
           <Providers>
           <HomeProvider>
-        {/* <Navbar /> */}
+
+            {/* @ts-ignore */}
+        <Navbar />
         <div className='container max-w-7xl mx-auto py-5'>
         {children}
         </div>
