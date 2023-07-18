@@ -34,7 +34,7 @@ async function page({params}:ProfileProps){
 </div>
 <div className="w-full lg:w-2/4 lg:mx-auto">
 {/* @ts-ignore */}
-<ProfilePostFeed id={Person?.id} />
+{/* <ProfilePostFeed id={Person?.id} /> */}
 </div>
 <div className="w-full lg:w-1/4 lg:ml-4 mt-8 lg:mt-0 flex flex-col space-y-8"> 
 <JoinedReddit subscriptions={Person?.subscriptions} />
