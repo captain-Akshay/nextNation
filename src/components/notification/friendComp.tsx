@@ -28,7 +28,7 @@ function DropdownMenuItemWithIcons({id, image, name,username }:friendCompProps) 
         id:id
       };
       const { data } = await axios.post(
-        `http://localhost:3000/api/friendaccept`,
+        `/api/friendaccept`,
         payload
       );
       return data;
