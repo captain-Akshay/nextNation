@@ -119,7 +119,6 @@ export const Editor: React.FC<EditorProps> = ({ subredditId }) => {
                 async uploadByFile(file: File) {
                   // upload to uploadthing
                   const [res] = await uploadFiles([file], 'imageUploader')
-
                   return {
                     success: 1,
                     file: {
@@ -208,7 +207,7 @@ export const Editor: React.FC<EditorProps> = ({ subredditId }) => {
             ref={(e) => {
               titleRef(e);
               // @ts-ignore
-              _titleRef.current = e as HTMLTextAreaElement;
+              _titleRef.current = e;
             }}
             {...rest}
             placeholder='Title'
