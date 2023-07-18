@@ -8,6 +8,7 @@ import { Loader2 } from 'lucide-react'
 import { FC, useEffect, useRef } from 'react'
 import Post from './Post'
 import { useSession } from 'next-auth/react'
+import { Button } from './ui/Button'
 
 interface PostFeedProps {
   initialPosts: ExtendedPost[]
@@ -15,11 +16,6 @@ interface PostFeedProps {
 }
 
 const PostFeed: FC<PostFeedProps> = ({ initialPosts, subredditName }) => {
-  const lastPostRef = useRef<HTMLElement>(null)
-  const { ref, entry } = useIntersection({
-    root: lastPostRef.current,
-    threshold: 1,
-  })
   const { data: session } = useSession()
 
   const { data, fetchNextPage, isFetchingNextPage } = useInfiniteQuery(
@@ -32,7 +28,6 @@ const PostFeed: FC<PostFeedProps> = ({ initialPosts, subredditName }) => {
       const { data } = await axios.get(query)
       return data as ExtendedPost[]
     },
-
     {
       getNextPageParam: (_, pages) => {
         return pages.length + 1
@@ -40,15 +35,7 @@ const PostFeed: FC<PostFeedProps> = ({ initialPosts, subredditName }) => {
       initialData: { pages: [initialPosts], pageParams: [1] },
     }
   )
-
-  useEffect(() => {
-    if (entry?.isIntersecting) {
-      fetchNextPage() // Load more posts when the last post comes into view
-    }
-  }, [entry,fetchNextPage])
-
   const posts = data?.pages.flatMap((page) => page) ?? initialPosts
-
   return (
     <ul className='flex flex-col col-span-2 space-y-6'>
       {posts.map((post, index) => {
@@ -62,19 +49,20 @@ const PostFeed: FC<PostFeedProps> = ({ initialPosts, subredditName }) => {
           (vote) => vote.userId === session?.user.id
         )
 
-        // if (index === posts.length - 1) {
-          // return (
-          //   <li key={post.id} ref={ref}>
-          //     <Post
-          //       post={post}
-          //       commentAmt={post.comments.length}
-          //       subredditName={post.subreddit.name}
-          //       votesAmt={votesAmt}
-          //       currentVote={currentVote}
-          //     />
-          //   </li>
-          // )
-        // } else {
+        if (index === posts.length - 1) {
+          return (
+            <li key={post.id}>
+              <Post
+                post={post}
+                commentAmt={post.comments.length}
+                subredditName={post.subreddit.name}
+                votesAmt={votesAmt}
+                currentVote={currentVote}
+              />
+              {/* <Button onClick={()=>fetchNextPage()}>Load More</Button> */}
+            </li>
+          )
+        } else {
           return (
             <li key={post.id}>
             <Post
@@ -87,7 +75,7 @@ const PostFeed: FC<PostFeedProps> = ({ initialPosts, subredditName }) => {
             </li>
           )
         }
-)}
+      })}
 
       {isFetchingNextPage && (
         <li className='flex justify-center'>
