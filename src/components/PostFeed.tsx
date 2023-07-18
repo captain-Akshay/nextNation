@@ -1,5 +1,4 @@
-'use client'
-
+"use client"
 import { INFINITE_SCROLL_PAGINATION_RESULTS } from '@/config'
 import { ExtendedPost } from '@/types/db'
 import { useIntersection } from '@mantine/hooks'
@@ -46,7 +45,7 @@ const PostFeed: FC<PostFeedProps> = ({ initialPosts, subredditName }) => {
     if (entry?.isIntersecting) {
       fetchNextPage() // Load more posts when the last post comes into view
     }
-  }, [entry, fetchNextPage])
+  }, [entry,fetchNextPage])
 
   const posts = data?.pages.flatMap((page) => page) ?? initialPosts
 
@@ -63,32 +62,32 @@ const PostFeed: FC<PostFeedProps> = ({ initialPosts, subredditName }) => {
           (vote) => vote.userId === session?.user.id
         )
 
-        if (index === posts.length - 1) {
-          // Add a ref to the last post in the list
+        // if (index === posts.length - 1) {
+          // return (
+          //   <li key={post.id} ref={ref}>
+          //     <Post
+          //       post={post}
+          //       commentAmt={post.comments.length}
+          //       subredditName={post.subreddit.name}
+          //       votesAmt={votesAmt}
+          //       currentVote={currentVote}
+          //     />
+          //   </li>
+          // )
+        // } else {
           return (
-            <li key={post.id} ref={ref}>
-              <Post
-                post={post}
-                commentAmt={post.comments.length}
-                subredditName={post.subreddit.name}
-                votesAmt={votesAmt}
-                currentVote={currentVote}
-              />
-            </li>
-          )
-        } else {
-          return (
+            <li key={post.id}>
             <Post
-              key={post.id}
               post={post}
               commentAmt={post.comments.length}
               subredditName={post.subreddit.name}
               votesAmt={votesAmt}
               currentVote={currentVote}
             />
+            </li>
           )
         }
-      })}
+)}
 
       {isFetchingNextPage && (
         <li className='flex justify-center'>
