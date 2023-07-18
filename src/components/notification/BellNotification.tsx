@@ -24,8 +24,8 @@ function BellNotification({data}:BellNotificationProps){
         <DropdownMenuContent className=" w-80">
           <DropdownMenuLabel>Friends Request</DropdownMenuLabel>
           <DropdownMenuSeparator />
-          <FriendRequestList data={data}>
-            </FriendRequestList>
+          {/* <FriendRequestList data={data}>
+            </FriendRequestList> */}
           </DropdownMenuContent>
       </DropdownMenu>
       </>
