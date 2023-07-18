@@ -19,7 +19,6 @@ const Navbar = async () => {
          </>
          ) : (
           <NavbarButton/>)}
-          {/* @ts-ignore */}
           <Notification />
           <NightComponent />
 
