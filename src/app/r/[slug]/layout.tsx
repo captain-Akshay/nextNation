@@ -6,7 +6,7 @@ import { db } from '@/lib/db';
 import RProvider from '@/components/ui/RProvider';
 
 export const metadata: Metadata = {
-  title: 'Breadit',
+  title: 'URVerse',
   description: 'A Reddit clone built with Next.js and TypeScript.',
 };
 
