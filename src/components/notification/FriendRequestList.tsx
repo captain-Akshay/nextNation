@@ -7,7 +7,7 @@ interface FriendRequestListProps {
 
 function FriendRequestList({ data }: FriendRequestListProps) {
   if (!data) {
-    return <div>No Request</div>; // Return null or a loading indicator if data is not available yet
+    return <div>No Request</div>;
   }
 
   return (
@@ -18,4 +18,4 @@ function FriendRequestList({ data }: FriendRequestListProps) {
     </>
   );
 }
-export default FriendRequestList
+export default FriendRequestList;

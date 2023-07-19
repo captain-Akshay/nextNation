@@ -16,7 +16,8 @@ const Navbar = async () => {
           <>
          <UserAccountNav user={session.user} />
          <Myprofile id={session.user.username}/>
-         {/* <Notification /> */}
+         {/* @ts-expect-error server component*/}
+         <Notification />
          </>
          ) : (
           <NavbarButton/>)}
