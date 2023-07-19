@@ -2,7 +2,8 @@ import { UserAccountNav } from './UserAccountNav'
 import SearchBar from './SearchBar'
 import { authOptions } from '@/lib/auth'
 import { getServerSession } from 'next-auth'
-import { NavbarButton,NavbarProvider,NightComponent,NavbarLogo } from '@/components/ui/NavbarContent'
+import { NavbarButton,NavbarProvider,NightComponent } from '@/components/ui/NavbarContent'
+import NavbarLogo from "@/components/ui/logo.png"
 import Notification from './notification/Notification'
 import Myprofile from './Myprofile'
 const Navbar = async () => {
