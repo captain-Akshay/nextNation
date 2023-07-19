@@ -6,7 +6,8 @@ import { FC } from 'react'
 import { useState } from 'react';
 import { buttonVariants } from '../ui/Button'
 import { Icons } from '../Icon'
-
+import Image from 'next/image';
+import logo from "@/components/ui/logo.png"
 //------------------------LOGO---------------------------
 export function NavbarLogo() {
     const { theme } = useTheme();
@@ -15,7 +16,7 @@ export function NavbarLogo() {
   
     return (
       <Link href="/" className={`flex gap-2 items-center ${logoTextColor}`}>
-        <Icons.logo className="h-8 w-8 sm:h-6 sm:w-6" />
+        <Image src={logo} alt='logo' width={50} height={50} />
         <p className="hidden text-sm font-medium md:block">URVerse</p>
       </Link>
     );
