@@ -60,6 +60,17 @@ model User {
   Post        Post[]
   Comment     Comment[]
   CommentVote CommentVote[]
+  Prompt      Prompt[]
+}
+
+model Prompt {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  author    User     @relation(fields: [authorId], references: [id])
+  authorId  String
+  body      String
+  tags      String
 }
 
 model Subreddit {

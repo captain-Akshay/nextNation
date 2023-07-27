@@ -6,6 +6,8 @@ import FriendsList from "@/components/profile/FriendsList"
 import JoinedReddit from "@/components/profile/JoinedReddit"
 import ProfilePostFeed from "@/components/profile/ProfilePostFeed"
 import { notFound } from "next/navigation"
+import SwitchButton from "@/components/ui/SwitchButton"
+import UpdatedProfileFeed from "@/components/profile/UpdatedProfileFeed"
 interface ProfileProps {
     params:{
         slug:string
@@ -34,6 +36,7 @@ async function page({params}:ProfileProps){
 </div>
 <div className="w-full lg:w-2/4 lg:mx-auto">
 {/* @ts-ignore */}
+<UpdatedProfileFeed/>
 {/* <ProfilePostFeed id={Person?.id} /> */}
 </div>
 <div className="w-full lg:w-1/4 lg:ml-4 mt-8 lg:mt-0 flex flex-col space-y-8"> 

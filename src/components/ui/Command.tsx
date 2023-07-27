@@ -42,12 +42,13 @@ const CommandInput = React.forwardRef<
   React.ComponentPropsWithoutRef<typeof CommandPrimitive.Input> & {
     isLoading: boolean
   }
->(({ className, isLoading, ...props }, ref) => (
-  <div className='flex items-center border-b px-3' cmdk-input-wrapper=''>
+>(({ className, isLoading,prefix, ...props }, ref) => (
+  <div className='flex items-center px-3' cmdk-input-wrapper=''>
     {isLoading ? (
       <Loader2 className='mr-2 h-4 w-4 shrink-0 opacity-50 animate-spin' />
     ) : (
-      <Search className='mr-2 h-4 w-4 shrink-0 opacity-50' />
+      prefix!==''?
+      <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>:<div className={`${prefix===''?"":"hidden"}`}><Search className='mr-2 h-4 w-4 shrink-0 opacity-50' /></div>
     )}
     <CommandPrimitive.Input
       ref={ref}

@@ -59,7 +59,7 @@ const PostFeed: FC<PostFeedProps> = ({ initialPosts, subredditName }) => {
                 votesAmt={votesAmt}
                 currentVote={currentVote}
               />
-              {/* <Button onClick={()=>fetchNextPage()}>Load More</Button> */}
+              
             </li>
           )
         } else {
@@ -82,7 +82,9 @@ const PostFeed: FC<PostFeedProps> = ({ initialPosts, subredditName }) => {
           <Loader2 className='w-6 h-6 text-zinc-500 animate-spin' />
         </li>
       )}
+          <Button onClick={()=>fetchNextPage()}>Load More</Button>
     </ul>
+
   )
 }
 

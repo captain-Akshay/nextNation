@@ -1,6 +1,5 @@
-'use client'
-
-import { Prisma, Subreddit } from '@prisma/client';
+"use client"
+import { Prisma, Subreddit, User } from '@prisma/client';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import debounce from 'lodash.debounce';
@@ -17,11 +16,12 @@ import {
 import { useOnClickOutside } from '@/hooks/use-on-click-outside';
 import { Users } from 'lucide-react';
 import { useTheme } from 'next-themes';
+import Link from 'next/link';
 
 interface SearchBarProps {}
-
 const SearchBar: FC<SearchBarProps> = ({}) => {
   const [input, setInput] = useState<string>('');
+  const [prefix, setPrefix] = useState<string>('');
   const pathname = usePathname();
   const commandRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
@@ -29,6 +29,7 @@ const SearchBar: FC<SearchBarProps> = ({}) => {
 
   useOnClickOutside(commandRef, () => {
     setInput('');
+    setPrefix('');
   });
 
   const request = debounce(async () => {
@@ -47,10 +48,8 @@ const SearchBar: FC<SearchBarProps> = ({}) => {
   } = useQuery({
     queryFn: async () => {
       if (!input) return [];
-      const { data } = await axios.get(`/api/search?q=${input}`);
-      return data as (Subreddit & {
-        _count: Prisma.SubredditCountOutputType;
-      })[];
+        const { data } = await axios.get(`/api/search/${prefix}?q=${input}`);
+        return data as Subreddit[]|User[];
     },
     queryKey: ['search-query'],
     enabled: false,
@@ -58,7 +57,22 @@ const SearchBar: FC<SearchBarProps> = ({}) => {
 
   useEffect(() => {
     setInput('');
+    setPrefix('');
   }, [pathname]);
+
+  const handleValueChange = (text: string) => {
+    setInput(text);
+    if (text.startsWith('/r')) {
+      setPrefix('/r');
+      setInput("");
+    } else if (text.startsWith('/u')) {
+      setPrefix('/u');
+      setInput("");
+    } else if(prefix.length==0||prefix.length>2){
+      setPrefix('');
+    }
+    debounceRequest();
+  };
 
   // Set colors based on the current theme
   const inputBorderColor = theme === 'dark' ? 'border-zinc-600' : 'border-gray-200';
@@ -69,38 +83,43 @@ const SearchBar: FC<SearchBarProps> = ({}) => {
     <Command
       ref={commandRef}
       className={`relative rounded-lg border ${inputBorderColor} max-w-lg z-50 overflow-visible`}
+      style={{ borderRadius: '9999px' }} // Rounded edges
+      prefix={prefix}
     >
+      <div className="relative">
+        {prefix && (
+          <div className="absolute left-3 top-2 text-gray-500 text-lg">{prefix}</div>
+        )}
       <CommandInput
         isLoading={isFetching}
-        onValueChange={(text) => {
-          setInput(text);
-          debounceRequest();
-        }}
+        onValueChange={handleValueChange}
         value={input}
         className='outline-none border-none focus:border-none focus:outline-none ring-0'
-        placeholder='Search communities...'
+        placeholder={prefix?"":"Search communities (/r) or users (/u)..."}
+        style={{ borderRadius: '9999px 9999px 0 0' }}
       />
-
+      </div>
       {input.length > 0 && (
         <CommandList className={`absolute top-full inset-x-0 shadow rounded-b-md ${commandListBgColor}`}>
           {isFetched && <CommandEmpty>No results found.</CommandEmpty>}
           {(queryResults?.length ?? 0) > 0 ? (
-            <CommandGroup heading='Communities'>
-              {queryResults?.map((subreddit) => (
-                <CommandItem
+            <CommandGroup heading={prefix==='/r'?'Communities':'Users'}>
+              {queryResults?.map((item) => {
+                return <CommandItem
                   onSelect={(e) => {
-                    router.push(`/r/${e}`);
+                    let url=`${prefix}/${e}`
+                    router.push(url); 
                     router.refresh();
                   }}
-                  key={subreddit.id}
-                  value={subreddit.name}
+                  key={item.id}
+                  value={item.name!}
                   className={commandItemTextColor}
                 >
                   <Users className='mr-2 h-4 w-4' />
-                  <a href={`/r/${subreddit.name}`}>r/{subreddit.name}</a>
+                  <Link href={`${prefix}/${item.name}`}>{prefix}/{item.name}</Link>
                 </CommandItem>
-              ))}
-            </CommandGroup>
+              })}
+                </CommandGroup>
           ) : null}
         </CommandList>
       )}
@@ -109,4 +128,3 @@ const SearchBar: FC<SearchBarProps> = ({}) => {
 };
 
 export default SearchBar;
-

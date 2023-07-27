@@ -1,5 +1,7 @@
 // import GeneralFeed from "@/components/homepage/GeneralFeed";
 // import CustomFeed from "@/components/homepage/CustomFeed";
+import CustomFeed from "@/components/homepage/CustomFeed";
+import GeneralFeed from "@/components/homepage/GeneralFeed";
 import RootProvider from "@/components/ui/RootProvider"
 import { getAuthSession } from '@/lib/auth';
 export const dynamic = 'force-dynamic';
@@ -10,7 +12,8 @@ export default async function Home() {
     <>
       <h1 className='font-bold text-3xl md:text-4xl'>Your feed</h1>
       <div className='grid grid-cols-1 md:grid-cols-3 gap-y-4 md:gap-x-4 py-6'>
-        {/* {session ? <CustomFeed /> : <GeneralFeed />} */}
+        {/* @ts-expect-error server component */}
+        {session ? <CustomFeed /> : <GeneralFeed />}
         <RootProvider/>
 
       </div>
