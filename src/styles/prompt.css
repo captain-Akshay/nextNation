@@ -1,0 +1,32 @@
+    @keyframes rainbow-border {
+    0% {
+      border-color: hsl(0, 100%, 50%);
+    }
+    16.67% {
+      border-color: hsl(60, 100%, 50%);
+    }
+    33.33% {
+      border-color: hsl(120, 100%, 50%);
+    }
+    50% {
+      border-color: hsl(180, 100%, 50%);
+    }
+    66.67% {
+      border-color: hsl(240, 100%, 50%);
+    }
+    83.33% {
+      border-color: hsl(300, 100%, 50%);
+    }
+    100% {
+      border-color: hsl(360, 100%, 50%);
+    }
+  }
+  
+  /* CSS for brightening the border on hover */
+  .btn:hover{
+    filter: brightness(120%);
+    transform: scale(1.1); 
+    animation: rainbow-border 4s linear infinite;
+    transition: border-color 0.3s ease;
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.7);
+}

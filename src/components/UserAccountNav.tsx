@@ -17,7 +17,10 @@ interface UserAccountNavProps{
 }
 
 export function UserAccountNav({ user }: UserAccountNavProps) {
-  const { theme } = useTheme();
+  const { theme,setTheme } = useTheme();
+  if (typeof window !== 'undefined') {
+    setTheme(window.localStorage.getItem("theme")??"light");
+  }
   // console.log(user);
 
   // Theme-specific class names
@@ -47,7 +50,9 @@ export function UserAccountNav({ user }: UserAccountNavProps) {
         <DropdownMenuItem asChild>
           <Link href='/'>Feed</Link>
         </DropdownMenuItem>
-
+        <DropdownMenuItem asChild>
+          <Link href='/p'>Prompts</Link>
+        </DropdownMenuItem>
         <DropdownMenuItem asChild>
           <Link href='/r/create'>Create Community</Link>
         </DropdownMenuItem>

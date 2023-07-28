@@ -25,8 +25,10 @@ const SearchBar: FC<SearchBarProps> = ({}) => {
   const pathname = usePathname();
   const commandRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
-  const { theme } = useTheme();
-
+  const { theme,setTheme } = useTheme();
+  if (typeof window !== 'undefined') {
+  setTheme(window.localStorage.getItem("theme")??"light");
+}
   useOnClickOutside(commandRef, () => {
     setInput('');
     setPrefix('');

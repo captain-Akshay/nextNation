@@ -16,14 +16,14 @@ const CreatePrompt = () => {
   const createPrompt = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
-  
+    const combinedTag = post.tag.replace(/#/g, ' ');
     try {
       const response = await fetch("/api/p/create", {
         method: "POST",
         body: JSON.stringify({
           prompt: post.prompt,
           userId: session?.user.id,
-          tag: post.tag,
+          tag: combinedTag,
         }),
       });
   

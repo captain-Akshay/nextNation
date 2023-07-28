@@ -10,8 +10,10 @@ import Image from 'next/image';
 import logo from "@/components/ui/logo.png"
 //------------------------LOGO---------------------------
 export function NavbarLogo() {
-    const { theme } = useTheme();
-  
+    const { theme,setTheme } = useTheme();
+    if (typeof window !== 'undefined') {
+      setTheme(window.localStorage.getItem("theme")??"light");
+    }
     const logoTextColor = theme === 'dark' ? 'text-white' : 'text-zinc-900';
   
     return (
@@ -24,8 +26,10 @@ export function NavbarLogo() {
 
 //------------------------SIGN_BUTTON---------------------------
 export function NavbarButton() {
-    const { theme } = useTheme();
-  
+    const { theme,setTheme } = useTheme();
+    if (typeof window !== 'undefined') {
+      setTheme(window.localStorage.getItem("theme")??"light");
+    }
     const buttonClasses = `${buttonVariants()} ${
       theme === 'dark' ? 'border-white' : 'border-zinc-300'
     }`;
@@ -40,7 +44,10 @@ export function NavbarButton() {
   }
 //------------------------PROVIDER---------------------------
 export function NavbarProvider({ children }: { children: React.ReactNode }) {
-    const { theme } = useTheme();
+    const { theme,setTheme } = useTheme();
+    if (typeof window !== 'undefined') {
+      setTheme(window.localStorage.getItem("theme")??"light");
+    }
     return (
       <div
         className={`fixed top-0 inset-x-0 h-fit ${
@@ -64,6 +71,9 @@ export const NightComponent: FC<NightComponentProps> = ({}) => {
   useEffect(() => {
     setMounted(true);
   }, []);
+  if (typeof window !== 'undefined') {
+    setTheme(window.localStorage.getItem("theme")??"light");
+  }
   return (<>
   <button
             aria-label="Toggle Dark Mode"

@@ -3,7 +3,10 @@ import { useTheme } from "next-themes";
 export default function HomeProvider({children}: {
     children: React.ReactNode
   }){
-    const { theme } = useTheme();
+    const { theme,setTheme } = useTheme();
+    if (typeof window !== 'undefined') {
+      setTheme(window.localStorage.getItem("theme")??"light");
+    }
     const backgroundColor = theme === 'dark' ? 'bg-black' : 'bg-zinc-100';
     return(
 

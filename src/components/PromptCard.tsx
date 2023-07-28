@@ -1,15 +1,23 @@
 "use client";
-
 import { useState } from "react";
 import Image from "next/image";
 import { Prompt } from "@prisma/client";
 import tick from "@/public/assets/icons/tick.svg";
 import copy from "@/public/assets/icons/copy.svg";
-const PromptCard = ({ post }:{post:Prompt}) => {
-  const [copied, setCopied] = useState('');
-  const handleProfileClick = () => {
+import { useTheme } from "next-themes";
+import { Link } from "lucide-react";
+import { formatTimeToNow } from "@/lib/utils";
 
+const PromptCard = ({ post }: { post: Prompt }) => {
+  const [copied, setCopied] = useState('');
+  const { theme,setTheme } = useTheme();
+  if (typeof window !== 'undefined') {
+    setTheme(window.localStorage.getItem("theme")??"light");
+  }
+  const handleProfileClick = () => {
+    // Implement your logic for handling profile clicks
   };
+
   const handleCopy = () => {
     setCopied(post.body);
     navigator.clipboard.writeText(post.body);
@@ -17,20 +25,24 @@ const PromptCard = ({ post }:{post:Prompt}) => {
   };
 
   return (
-    <div className='prompt_card'>
+    <div className={`prompt_card bg-${theme === "light" ? "white" : "gray-800"} rounded-lg p-4 border border-white my-3`}>
       <div className='flex justify-between items-start gap-5'>
+        {/* Profile section (not implemented) */}
         <div
           className='flex-1 flex justify-start items-center gap-3 cursor-pointer'
           onClick={handleProfileClick}
         >
+          {/* Profile content */}
+          <div className={`max-h-40 mt-1 text-xs`}>
+            <span>Posted by u/{post.authorId}</span>{' '}
+            {formatTimeToNow(new Date(post.createdAt))}
+          </div>
         </div>
+        {/* Copy button section */}
         <div className='copy_btn' onClick={handleCopy}>
+          {/* Show 'tick' icon if prompt has been copied, otherwise show 'copy' icon */}
           <Image
-            src={
-              copied === post.body
-                ? tick
-                : copy
-            }
+            src={copied === post.body ? tick : copy}
             alt={copied === post.body ? "tick_icon" : "copy_icon"}
             width={20}
             height={20}
@@ -38,10 +50,11 @@ const PromptCard = ({ post }:{post:Prompt}) => {
         </div>
       </div>
 
-      <p className='my-4 font-satoshi text-sm text-gray-700'>{post.body}</p>
-      <p
-        className='font-inter text-sm blue_gradient cursor-pointer'
-      >
+      {/* Display the prompt body text */}
+      <p className={`my-4 font-satoshi text-sm text-${theme === "light" ? "gray-700" : "gray-300"}`}>{post.body}</p>
+
+      {/* Display the prompt tags */}
+      <p className={`font-inter text-sm blue_gradient cursor-pointer text-${theme === "light" ? "blue-500" : "blue-400"}`}>
         #{post.tags}
       </p>
 

@@ -14,8 +14,10 @@ export default function RProvider({subreddit,memberCount,slug,children,session,i
     isSubscribed:boolean,
     session:any,
   }){
-    const { theme } = useTheme();
-
+    const { theme,setTheme } = useTheme();
+    if (typeof window !== 'undefined') {
+      setTheme(window.localStorage.getItem("theme")??"light");
+    }
     // Set colors based on the current theme
     const textColor = theme === 'dark' ? 'text-white' : 'text-black';
     const bgColor = theme === 'dark' ? 'bg-black' : 'bg-white';

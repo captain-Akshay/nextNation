@@ -11,7 +11,10 @@ interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 const UserAuthForm: FC<UserAuthFormProps> = ({ className, ...props }) => {
   const { toast } = useToast()
   const [isLoading, setIsLoading] = React.useState<boolean>(false)
-  const { theme } = useTheme();
+  const { theme,setTheme } = useTheme();
+  if (typeof window !== 'undefined') {
+    setTheme(window.localStorage.getItem("theme")??"light");
+  }
   const loginWithGoogle = async () => {
     setIsLoading(true)
 
