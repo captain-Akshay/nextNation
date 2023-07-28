@@ -5,7 +5,6 @@ import { Post, User, Vote } from '@prisma/client';
 import { MessageSquare } from 'lucide-react';
 import Link from 'next/link';
 import { FC, useRef } from 'react';
-import EditorOutput from './EditorOutput';
 import PostVoteClient from './post-vote/PostVoteClient';
 import { useTheme } from 'next-themes';
 
@@ -69,11 +68,11 @@ const Post: FC<PostProps> = ({
                 href={`/u/${post.author.username}`}> u/{post.author.username} </Link></span>{' '}
             {formatTimeToNow(new Date(post.createdAt))}
           </div>
-          <a href={`/r/${subredditName}/post/${post.id}`}>
+          <Link href={`/r/${subredditName}/post/${post.id}`}>
             <h1 className={`text-lg font-semibold py-2 leading-6 ${textColor}`}>
               {post.title}
             </h1>
-          </a>
+          </Link>
 
           <div
             className='relative text-sm max-h-40 w-full overflow-clip'
