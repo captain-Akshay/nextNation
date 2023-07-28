@@ -2,10 +2,9 @@
 import { useState } from "react";
 import Image from "next/image";
 import { Prompt } from "@prisma/client";
-import tick from "@/public/assets/icons/tick.svg";
-import copy from "@/public/assets/icons/copy.svg";
+import tick from "@/icons/tick.svg";
+import copy from "@/icons/copy.svg";
 import { useTheme } from "next-themes";
-import { Link } from "lucide-react";
 import { formatTimeToNow } from "@/lib/utils";
 
 const PromptCard = ({ post }: { post: Prompt }) => {
