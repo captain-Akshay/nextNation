@@ -30,7 +30,10 @@ const Post: FC<PostProps> = ({
   commentAmt,
 }) => {
   const pRef = useRef<HTMLParagraphElement>(null);
-  const { theme } = useTheme();
+  const { theme,setTheme } = useTheme();
+  if (typeof window !== 'undefined') {
+    setTheme(window.localStorage.getItem("theme")??"light");
+  }
 
   // Set colors based on the current theme
   const bgColor = theme === 'dark' ? 'bg-gray-900' : 'bg-white';

@@ -31,7 +31,10 @@ import { useCustomToasts } from '@/hooks/use-custom-toasts'
 import { useRouter } from "next/navigation";
 
 export function ProfileInfo({Profile,session}:ProfileInfoProps){
-  const { theme } = useTheme();
+  const { theme,setTheme } = useTheme();
+  if (typeof window !== 'undefined') {
+    setTheme(window.localStorage.getItem("theme")??"light");
+  }
   const router = useRouter();
   const { loginToast } = useCustomToasts()
   const [sendIcon,setSendIcon]=React.useState(Icons.friendRequestSend)

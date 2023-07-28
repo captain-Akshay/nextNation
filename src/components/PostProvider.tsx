@@ -12,7 +12,10 @@ interface PostProviderSubProps {
   }
 
   export const PostProvider= ({ children }:PostProviderProps) => {
-    const { theme } = useTheme();
+    const { theme,setTheme } = useTheme();
+    if (typeof window !== 'undefined') {
+      setTheme(window.localStorage.getItem("theme")??"light");
+    }
   
     // Set colors based on the current theme
     const containerBgColor = theme === 'dark' ? 'bg-zinc-900' : 'bg-white';
@@ -25,7 +28,10 @@ interface PostProviderSubProps {
     );
   };
 export const PostProviderSub = ({children,post,cachedPost}:PostProviderSubProps) => {
-    const { theme } = useTheme();
+  const { theme,setTheme } = useTheme();
+  if (typeof window !== 'undefined') {
+    setTheme(window.localStorage.getItem("theme")??"light");
+  }
 
     // Set colors based on the current theme
     const containerBgColor = theme === 'dark' ? 'bg-zinc-900' : 'bg-white';
@@ -48,7 +54,10 @@ export const PostProviderSub = ({children,post,cachedPost}:PostProviderSubProps)
   import { ArrowBigUp, ArrowBigDown, Loader2 } from 'lucide-react';
   
   export function PostVoteShell(){
-    const { theme } = useTheme();
+    const { theme,setTheme } = useTheme();
+    if (typeof window !== 'undefined') {
+      setTheme(window.localStorage.getItem("theme")??"light");
+    }
 
     // Set colors based on the current theme
     const containerTextColor = theme === 'dark' ? 'text-white' : 'text-gray-900';

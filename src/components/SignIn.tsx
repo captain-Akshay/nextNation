@@ -6,7 +6,10 @@ import Link from 'next/link'
 import { useTheme } from 'next-themes';
 
 const SignIn = () => {
-  const { theme } = useTheme();
+  const { theme,setTheme } = useTheme();
+  if (typeof window !== 'undefined') {
+    setTheme(window.localStorage.getItem("theme")??"light");
+  }
 
   const containerClass = theme === 'dark' ? 'text-white' : 'text-black';
   const linkClass = theme === 'dark' ? 'text-brand' : 'text-[#0070f3]';

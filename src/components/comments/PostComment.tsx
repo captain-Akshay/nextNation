@@ -35,7 +35,10 @@ const PostComment: FC<PostCommentProps> = ({
   currentVote,
   postId,
 }) => {
-  const { resolvedTheme } = useTheme();
+  const { theme,setTheme } = useTheme();
+  if (typeof window !== 'undefined') {
+    setTheme(window.localStorage.getItem("theme")??"light");
+  }
   const { data: session } = useSession();
   const [isReplying, setIsReplying] = useState<boolean>(false);
   const commentRef = useRef<HTMLDivElement>(null);
@@ -68,7 +71,7 @@ const PostComment: FC<PostCommentProps> = ({
       setIsReplying(false);
     },
   });
-  const textColorClass = resolvedTheme === 'dark' ? 'text-white' : 'text-zinc-900';
+  const textColorClass = theme === 'dark' ? 'text-white' : 'text-zinc-900';
 
   return (
     <div ref={commentRef} className='flex flex-col'>

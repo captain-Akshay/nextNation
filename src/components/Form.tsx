@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { useTheme } from 'next-themes';
-import SwitchButton from "./ui/SwitchButton";
 
 interface FormProps {
   type: string;
@@ -11,7 +10,10 @@ interface FormProps {
 }
 
 const Form: React.FC<FormProps> = ({ type, post, setPost, submitting, handleSubmit }) => {
-  const { theme } = useTheme();
+  const { theme,setTheme } = useTheme();
+  if (typeof window !== 'undefined') {
+    setTheme(window.localStorage.getItem("theme")??"light");
+  }
   const isDarkTheme = theme === 'dark';
 
   const getGradientStyle = () => {

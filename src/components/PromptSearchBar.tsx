@@ -5,8 +5,10 @@ import "@/styles/prompt.css"
 import PromptCard from './PromptCard';
 import { Prompt } from '@prisma/client';
 const PromptSearchBar = () => {
-  const { theme } = useTheme();
-
+  const { theme,setTheme } = useTheme();
+  if (typeof window !== 'undefined') {
+    setTheme(window.localStorage.getItem("theme")??"light");
+  }
   const [input, setInput] = useState('');
   const [tags, setTags] = useState<string[]>([]);
   const [prompts,setprompts]=useState<Prompt[]>([])

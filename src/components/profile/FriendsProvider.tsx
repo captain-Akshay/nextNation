@@ -10,7 +10,10 @@ interface FriendsProviderProps {
 }
 
 function FriendsProvider({image,name,username}:FriendsProviderProps){
-    const { theme } = useTheme();
+  const { theme,setTheme } = useTheme();
+  if (typeof window !== 'undefined') {
+    setTheme(window.localStorage.getItem("theme")??"light");
+  }
 
   const backgroundColor = theme === 'dark' ? 'bg-gray-900' : 'bg-white';
   const textColor = theme === 'dark' ? 'text-white' : 'text-gray-900';
