@@ -11,6 +11,8 @@ function RedditSub({name,id}:RedditSubProps){
   const { theme,setTheme } = useTheme();
   if (typeof window !== 'undefined') {
     setTheme(window.localStorage.getItem("theme")??"light");
+  }else{
+    setTheme("light")
   }
 
   const backgroundColor = theme === 'dark' ? 'bg-gray-900' : 'bg-white';

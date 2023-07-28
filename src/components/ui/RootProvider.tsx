@@ -1,5 +1,4 @@
 "use client";
-import { useEffect } from 'react';
 import { useTheme } from 'next-themes';
 import { Home as HomeIcon } from 'lucide-react';
 import Link from 'next/link';
@@ -100,7 +99,12 @@ function PromptCard({ bgColor, textColor, hoverBgColor, hoverTextColor }: CardPr
 }
 
 export default function RootProvider() {
-  const { theme } = useTheme();
+  const { theme,setTheme } = useTheme();
+  if (typeof window !== 'undefined') {
+    setTheme(window.localStorage.getItem("theme")??"light");
+  }else{
+    setTheme("light")
+  }
   const bgColor = theme === 'dark' ? 'bg-gray-800' : 'bg-blue-100';
   const textColor = theme === 'dark' ? 'text-white' : 'text-zinc-500';
   const hoverBgColor = theme === 'dark' ? 'bg-gray-700' : 'bg-blue-500';

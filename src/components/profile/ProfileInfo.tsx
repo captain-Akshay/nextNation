@@ -34,6 +34,8 @@ export function ProfileInfo({Profile,session}:ProfileInfoProps){
   const { theme,setTheme } = useTheme();
   if (typeof window !== 'undefined') {
     setTheme(window.localStorage.getItem("theme")??"light");
+  }else{
+    setTheme("light")
   }
   const router = useRouter();
   const { loginToast } = useCustomToasts()

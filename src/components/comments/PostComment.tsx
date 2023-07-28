@@ -38,6 +38,8 @@ const PostComment: FC<PostCommentProps> = ({
   const { theme,setTheme } = useTheme();
   if (typeof window !== 'undefined') {
     setTheme(window.localStorage.getItem("theme")??"light");
+  }else{
+    setTheme("light")
   }
   const { data: session } = useSession();
   const [isReplying, setIsReplying] = useState<boolean>(false);

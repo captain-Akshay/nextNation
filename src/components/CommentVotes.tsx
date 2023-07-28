@@ -25,7 +25,12 @@ const CommentVotes: FC<CommentVotesProps> = ({
   votesAmt: _votesAmt,
   currentVote: _currentVote,
 }) => {
-  const { resolvedTheme } = useTheme();
+  const { theme,setTheme } = useTheme();
+  if (typeof window !== 'undefined') {
+    setTheme(window.localStorage.getItem("theme")??"light");
+  }else{
+    setTheme("light")
+  }
   const { loginToast } = useCustomToasts();
   const [votesAmt, setVotesAmt] = useState<number>(_votesAmt);
   const [currentVote, setCurrentVote] = useState<PartialVote | undefined>(
@@ -77,7 +82,7 @@ const CommentVotes: FC<CommentVotesProps> = ({
     },
   });
 
-  const textColorClass = resolvedTheme === 'dark' ? 'text-white' : 'text-zinc-900';
+  const textColorClass = theme === 'dark' ? 'text-white' : 'text-zinc-900';
 
   return (
     <div className='flex gap-1'>

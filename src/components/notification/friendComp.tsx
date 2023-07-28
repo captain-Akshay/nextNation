@@ -3,7 +3,6 @@ import Image from "next/image"
 import { Avatar } from "../ui/Avatar"
 import { DropdownMenuItem } from "../ui/DropDownMenu"
 import { Check, XCircle } from "lucide-react"
-import { useTheme } from "next-themes";
 import { useRouter } from "next/navigation"
 import { useMutation } from "@tanstack/react-query"
 import axios from "axios"

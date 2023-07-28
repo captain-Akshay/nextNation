@@ -20,6 +20,8 @@ export function UserAccountNav({ user }: UserAccountNavProps) {
   const { theme,setTheme } = useTheme();
   if (typeof window !== 'undefined') {
     setTheme(window.localStorage.getItem("theme")??"light");
+  }else{
+    setTheme("light")
   }
   // console.log(user);
 

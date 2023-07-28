@@ -8,6 +8,8 @@ const PromptSearchBar = () => {
   const { theme,setTheme } = useTheme();
   if (typeof window !== 'undefined') {
     setTheme(window.localStorage.getItem("theme")??"light");
+  }else{
+    setTheme("light")
   }
   const [input, setInput] = useState('');
   const [tags, setTags] = useState<string[]>([]);

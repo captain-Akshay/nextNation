@@ -14,6 +14,8 @@ const UserAuthForm: FC<UserAuthFormProps> = ({ className, ...props }) => {
   const { theme,setTheme } = useTheme();
   if (typeof window !== 'undefined') {
     setTheme(window.localStorage.getItem("theme")??"light");
+  }else{
+    setTheme("light")
   }
   const loginWithGoogle = async () => {
     setIsLoading(true)

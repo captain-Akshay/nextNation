@@ -9,6 +9,8 @@ const SignIn = () => {
   const { theme,setTheme } = useTheme();
   if (typeof window !== 'undefined') {
     setTheme(window.localStorage.getItem("theme")??"light");
+  }else{
+    setTheme("light")
   }
 
   const containerClass = theme === 'dark' ? 'text-white' : 'text-black';

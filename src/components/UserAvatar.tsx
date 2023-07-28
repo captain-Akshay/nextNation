@@ -46,6 +46,8 @@ export function UserAvatar({ user, ...props }: UserAvatarProps) {
   const { theme,setTheme } = useTheme();
   if (typeof window !== 'undefined') {
     setTheme(window.localStorage.getItem("theme")??"light");
+  }else{
+    setTheme("light")
   }
   // Theme-specific ring class
   const ringClass = theme === 'dark' ? 'ring-white' : 'ring-blue';

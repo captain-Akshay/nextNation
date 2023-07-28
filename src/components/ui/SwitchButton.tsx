@@ -1,9 +1,14 @@
 "use client"
-import React, { useState } from "react";
+import React from "react";
 import { useTheme } from "next-themes";
 
 const Switch = ({ isOn, handleToggle, type }:{isOn:boolean,handleToggle:() => void,type:string}) => {
-  const { theme } = useTheme();
+  const { theme,setTheme } = useTheme();
+  if (typeof window !== 'undefined') {
+    setTheme(window.localStorage.getItem("theme")??"light");
+  }else{
+    setTheme("light")
+  }
   return (
 <div
       className={`switch relative w-32 h-8 rounded-full ${

@@ -1,5 +1,5 @@
 "use client"
-import { Prisma, Subreddit, User } from '@prisma/client';
+import { Subreddit, User } from '@prisma/client';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import debounce from 'lodash.debounce';
@@ -28,6 +28,8 @@ const SearchBar: FC<SearchBarProps> = ({}) => {
   const { theme,setTheme } = useTheme();
   if (typeof window !== 'undefined') {
   setTheme(window.localStorage.getItem("theme")??"light");
+}else{
+  setTheme("light")
 }
   useOnClickOutside(commandRef, () => {
     setInput('');

@@ -13,6 +13,8 @@ const Form: React.FC<FormProps> = ({ type, post, setPost, submitting, handleSubm
   const { theme,setTheme } = useTheme();
   if (typeof window !== 'undefined') {
     setTheme(window.localStorage.getItem("theme")??"light");
+  }else{
+    setTheme("light")
   }
   const isDarkTheme = theme === 'dark';
 

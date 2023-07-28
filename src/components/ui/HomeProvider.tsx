@@ -6,6 +6,8 @@ export default function HomeProvider({children}: {
     const { theme,setTheme } = useTheme();
     if (typeof window !== 'undefined') {
       setTheme(window.localStorage.getItem("theme")??"light");
+    }else{
+      setTheme("light")
     }
     const backgroundColor = theme === 'dark' ? 'bg-black' : 'bg-zinc-100';
     return(

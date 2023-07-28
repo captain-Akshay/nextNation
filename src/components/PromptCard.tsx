@@ -12,6 +12,8 @@ const PromptCard = ({ post }: { post: Prompt }) => {
   const { theme,setTheme } = useTheme();
   if (typeof window !== 'undefined') {
     setTheme(window.localStorage.getItem("theme")??"light");
+  }else{
+    setTheme("light")
   }
   const handleProfileClick = () => {
     // Implement your logic for handling profile clicks

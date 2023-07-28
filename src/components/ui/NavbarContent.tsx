@@ -5,7 +5,6 @@ import { useTheme } from 'next-themes';
 import { FC } from 'react'
 import { useState } from 'react';
 import { buttonVariants } from '../ui/Button'
-import { Icons } from '../Icon'
 import Image from 'next/image';
 import logo from "@/components/ui/logo.png"
 //------------------------LOGO---------------------------
@@ -13,6 +12,8 @@ export function NavbarLogo() {
     const { theme,setTheme } = useTheme();
     if (typeof window !== 'undefined') {
       setTheme(window.localStorage.getItem("theme")??"light");
+    }else{
+      setTheme("light")
     }
     const logoTextColor = theme === 'dark' ? 'text-white' : 'text-zinc-900';
   
@@ -29,6 +30,8 @@ export function NavbarButton() {
     const { theme,setTheme } = useTheme();
     if (typeof window !== 'undefined') {
       setTheme(window.localStorage.getItem("theme")??"light");
+    }else{
+      setTheme("light")
     }
     const buttonClasses = `${buttonVariants()} ${
       theme === 'dark' ? 'border-white' : 'border-zinc-300'
@@ -47,6 +50,8 @@ export function NavbarProvider({ children }: { children: React.ReactNode }) {
     const { theme,setTheme } = useTheme();
     if (typeof window !== 'undefined') {
       setTheme(window.localStorage.getItem("theme")??"light");
+    }else{
+      setTheme("light")
     }
     return (
       <div
@@ -73,6 +78,8 @@ export const NightComponent: FC<NightComponentProps> = ({}) => {
   }, []);
   if (typeof window !== 'undefined') {
     setTheme(window.localStorage.getItem("theme")??"light");
+  }else{
+    setTheme("light")
   }
   return (<>
   <button
