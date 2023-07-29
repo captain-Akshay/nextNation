@@ -7,7 +7,7 @@ import RProvider from '@/components/ui/RProvider';
 
 export const metadata: Metadata = {
   title: 'URVerse',
-  description: 'A Reddit clone built with Next.js and TypeScript.',
+  description: 'A Community/Prompt built with Next.js and TypeScript for Tech community Only ! ',
 };
 
 const Layout = async ({
