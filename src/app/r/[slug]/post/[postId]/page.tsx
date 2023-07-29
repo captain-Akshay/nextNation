@@ -40,7 +40,7 @@ const SubRedditPostPage = async ({ params }: SubRedditPostPageProps) => {
   if (!post && !cachedPost) return notFound()
 
   return (
-    <div>
+    <div className="rounded-md">
       <PostProvider>
         <Suspense fallback={<PostVoteShell />}>
           {/* @ts-expect-error server component */}

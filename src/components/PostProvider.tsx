@@ -24,7 +24,7 @@ interface PostProviderSubProps {
     const containerTextColor = theme === 'dark' ? 'text-white' : 'text-gray-900';
   
     return (
-      <div className={`h-full flex flex-col sm:flex-row items-center sm:items-start justify-between ${containerBgColor} ${containerTextColor}`}>
+      <div className={`h-full flex flex-col sm:flex-row items-center sm:items-start justify-between ${containerBgColor} ${containerTextColor} rounded-lg`}>
         {children}
       </div>
     );
@@ -40,7 +40,7 @@ export const PostProviderSub = ({children,post,cachedPost}:PostProviderSubProps)
     const containerTextColor = theme === 'dark' ? 'text-white' : 'text-gray-900';
   
     return (
-      <div className={`sm:w-0 w-full flex-1 ${containerBgColor} p-4 rounded-sm`}>
+      <div className={`sm:w-0 w-full flex-1 ${containerBgColor} pr-4 pt-4 pb-4 rounded-sm `}>
         <p className='max-h-40 mt-1 truncate text-xs text-gray-500'>
           Posted by u/{post?.author.username ?? cachedPost.authorUsername}{' '}
           {formatTimeToNow(new Date(post?.createdAt ?? cachedPost.createdAt))}

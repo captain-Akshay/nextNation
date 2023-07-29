@@ -39,7 +39,7 @@ export default function RProvider({subreddit,memberCount,slug,children,session,i
           <dl className={`divide-y divide-gray-100 px-6 py-4 text-sm leading-6 ${bgColor} ${textColor}`}>
             <div className='flex justify-between gap-x-4 py-3'>
               <dt className='text-gray-500'>Created</dt>
-              <dd className='text-gray-700'>
+              <dd className={`${textColor}`}>
                 <time dateTime={subreddit.createdAt.toDateString()}>
                   {format(subreddit.createdAt, 'MMMM d, yyyy')}
                 </time>
@@ -48,7 +48,7 @@ export default function RProvider({subreddit,memberCount,slug,children,session,i
             <div className='flex justify-between gap-x-4 py-3'>
               <dt className='text-gray-500'>Members</dt>
               <dd className='flex items-start gap-x-2'>
-                <div className='text-gray-900'>{memberCount}</div>
+                <div className={`${textColor}`}>{memberCount}</div>
               </dd>
             </div>
             {subreddit.creatorId === session?.user?.id ? (
