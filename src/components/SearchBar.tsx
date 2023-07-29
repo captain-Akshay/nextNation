@@ -86,7 +86,7 @@ const SearchBar: FC<SearchBarProps> = ({}) => {
   return (
     <Command
       ref={commandRef}
-      className={`relative rounded-lg border ${inputBorderColor} max-w-lg z-50 overflow-visible`}
+      className={`relative rounded-lg border ${inputBorderColor} max-w-lg z-50 overflow-visible hidden md:block`}
       style={{ borderRadius: '9999px' }} // Rounded edges
       prefix={prefix}
     >

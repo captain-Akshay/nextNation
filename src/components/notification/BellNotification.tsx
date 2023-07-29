@@ -17,6 +17,7 @@ interface BellNotificationProps {
 
 function BellNotification({data}:BellNotificationProps){
     return (
+      <div className=" mt-2">
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           {data?.length===0?<Bell />:<BellRing />}
@@ -28,6 +29,7 @@ function BellNotification({data}:BellNotificationProps){
             </FriendRequestList>
           </DropdownMenuContent>
       </DropdownMenu>
+      </div>
     )
 }
 
