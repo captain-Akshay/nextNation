@@ -9,7 +9,7 @@ import { useMutation } from '@tanstack/react-query';
 import { useTheme } from 'next-themes';
 
 function Community() {
-  const { theme, setTheme } = useTheme(); 
+  const { theme } = useTheme(); 
   const { toast } = useToast();
   const { loginToast } = useCustomToasts();
   const [filterSelected, setFilterSelected] = useState('popular');
@@ -17,7 +17,7 @@ function Community() {
 
   const { mutate: getSubs, isLoading } = useMutation({
     mutationFn: async () => {
-      const { data } = await axios.get(`/api/community?q=${filterSelected}`);
+      const { data } = await axios.get(`/api/friendrequest?q=${filterSelected}`);
       return data as Subreddit[];
     },
     onError: (err: AxiosError) => {

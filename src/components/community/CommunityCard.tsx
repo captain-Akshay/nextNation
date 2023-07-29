@@ -12,7 +12,7 @@ interface CommunityCardProps {
 
 const CommunityCard: FC<CommunityCardProps> = ({itemname,created,creator,id}) => {
     let randomNumber=Math.round(Math.random()*16)
-    const {theme,setTheme}=useTheme();
+    const {theme}=useTheme();
     return (
         <Link href={`/r/${itemname}`}>
         <div
