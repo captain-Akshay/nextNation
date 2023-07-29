@@ -12,7 +12,8 @@ import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
 const Page = () => {
-  const router = useRouter()
+  const router = useRouter();
+  const regexPattern = /[/"|\\,.@#$%^&*()~`':<>?[\]{}_/*\-+]/;
   const [input, setInput] = useState<string>('')
   const { loginToast } = useCustomToasts()
   const { theme } = useTheme();
@@ -20,14 +21,19 @@ const Page = () => {
   const textColor = theme === 'dark' ? 'text-white' : 'text-gray-800';
   const { mutate: createCommunity, isLoading } = useMutation({
     mutationFn: async () => {
+      if (regexPattern.test(input)) {
+        // Throw an error with a custom message if the input contains disallowed characters
+        throw new Error('Invalid subreddit name. The name should not contain any of the disallowed characters.');
+      }
+      else{
       const payload: CreateSubredditPayload = {
         name: input,
       }
 
       const { data } = await axios.post('/api/subreddit', payload)
-      return data
+      return data}
     },
-    onError: (err) => {
+    onError: (err:Error) => {
       console.log(err);
       if (err instanceof AxiosError) {
         if (err.response?.status === 409) {
@@ -50,6 +56,12 @@ const Page = () => {
           return loginToast()
         }
       }
+      if (err.message === 'Invalid subreddit name. The name should not contain any of the disallowed characters.') {
+        return toast({
+          title: 'Invalid subreddit name.',
+          description: 'The name should not contain any of the disallowed characters.',
+          variant: 'destructive',
+        });}
       toast({
         title: 'There was an error.',
         description: 'Could not create subreddit.',
