@@ -7,6 +7,8 @@ import { useState } from 'react';
 import { buttonVariants } from '../ui/Button'
 import Image from 'next/image';
 import logo from "@/components/ui/logo.png"
+import logoDark from "@/components/ui/logo-dark.png"
+
 //------------------------LOGO---------------------------
 export function NavbarLogo() {
     const { theme,setTheme } = useTheme();
@@ -19,7 +21,7 @@ export function NavbarLogo() {
   
     return (
       <Link href="/" className={`flex gap-2 items-center ${logoTextColor}`}>
-        <Image src={logo} alt='logo' width={50} height={50} />
+        <Image src={theme==="dark"?logo:logoDark} alt='logo' width={50} height={50} />
         <p className="hidden text-sm font-medium md:block">URVerse</p>
       </Link>
     );
