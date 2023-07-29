@@ -10,6 +10,7 @@ import { formatTimeToNow } from "@/lib/utils";
 const PromptCard = ({ post }: { post: Prompt }) => {
   const [copied, setCopied] = useState('');
   const { theme,setTheme } = useTheme();
+  const Tags=post.tags.split("#")
   if (typeof window !== 'undefined') {
     setTheme(window.localStorage.getItem("theme")??"light");
   }else{
@@ -52,12 +53,12 @@ const PromptCard = ({ post }: { post: Prompt }) => {
       </div>
 
       {/* Display the prompt body text */}
-      <p className={`my-4 font-satoshi text-sm text-${theme === "light" ? "gray-700" : "gray-300"}`}>{post.body}</p>
+      <p className={`my-4 font-satoshi text-sm text-${theme === "light" ? "black" : "white"}`}>{post.body}</p>
 
       {/* Display the prompt tags */}
-      <p className={`font-inter text-sm blue_gradient cursor-pointer text-${theme === "light" ? "blue-500" : "blue-400"}`}>
-        #{post.tags}
-      </p>
+      {Tags.map((item,index)=>{
+        return <span className={`inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2`} key={index}>#{item}</span>
+      })}
 
       {/* {session?.user.id === post.creator._id && pathName === "/profile" && (
         <div className='mt-5 flex-center gap-4 border-t border-gray-100 pt-3'>
