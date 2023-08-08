@@ -4,9 +4,7 @@ import { getAuthSession } from "@/lib/auth"
 import type { Session } from 'next-auth'
 import FriendsList from "@/components/profile/FriendsList"
 import JoinedReddit from "@/components/profile/JoinedReddit"
-import ProfilePostFeed from "@/components/profile/ProfilePostFeed"
 import { notFound } from "next/navigation"
-import SwitchButton from "@/components/ui/SwitchButton"
 import UpdatedProfileFeed from "@/components/profile/UpdatedProfileFeed"
 interface ProfileProps {
     params:{
@@ -26,6 +24,11 @@ async function page({params}:ProfileProps){
       createdSubreddits:true,
     },
   })
+  const Friends=await db.friends.findMany({
+    where:{
+      friend:session?.user.id
+    }
+  });
   if (!Person) return notFound();
   return (
 <div className="py-14 flex flex-col lg:flex-row">
@@ -42,7 +45,7 @@ async function page({params}:ProfileProps){
 <div className="w-full lg:w-1/4 lg:ml-4 mt-8 lg:mt-0 flex flex-col space-y-8"> 
 <JoinedReddit subscriptions={Person?.subscriptions} />
 {/* @ts-ignore */}
-<FriendsList />
+<FriendsList data={Friends} />
   </div>
 </div>
   );

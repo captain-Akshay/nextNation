@@ -9,7 +9,10 @@ interface JoinedRedditProps {
 
 function JoinedReddit({subscriptions}:JoinedRedditProps){
   return(    
-  <Card className="w-[350px] h-64 overflow-y-auto">
+  <Card className="w-[350px] h-80 overflow-y-auto">
+      <div className="px-4 py-2 text-lg font-bold text-gray-500 text-center">
+        Community Joined
+      </div>
     {/* @ts-expect-error react component */}
     {subscriptions?.map((item,index)=>(<RedditComp key={index} subredditId={item.subredditId} />))}
   </Card>)

@@ -45,7 +45,32 @@ function DropdownMenuItemWithIcons({id, image, name,username }:friendCompProps) 
       router.refresh();
     },
   });
-
+  const { mutate: rejectRequest } = useMutation({
+    mutationFn: async () => {
+      setSubmitted(true);
+      const payload={
+        id:id
+      };
+      await axios.post(
+        `/api/friendreject`,
+        payload
+      );
+    },
+    onError: () => {
+      setSubmitted(false);
+      return toast({
+        title: 'Something went wrong.',
+        description: "Friend Request Stuck",
+        variant: 'destructive',
+      });
+    },
+    onSuccess: () => {
+      router.refresh();
+    },
+  });
+  if (isSubmitted) {
+    return null; 
+  }
   return (
 <DropdownMenuItem className={`${isSubmitted?" hidden":""}`}>
   <div onClick={() => router.push(userLink)}>
@@ -70,7 +95,7 @@ function DropdownMenuItemWithIcons({id, image, name,username }:friendCompProps) 
     <Check />
     </Button>
   </div>
-  <Button isLoading={isLoading} className="hover:bg-red-600 hover:rounded-full"  onClick={()=>(acceptRequest())}>
+  <Button isLoading={isLoading} className="hover:bg-red-600 hover:rounded-full"  onClick={()=>(rejectRequest())}>
     <XCircle />
   </Button>
 </DropdownMenuItem>

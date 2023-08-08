@@ -20,11 +20,6 @@ export async function POST(req: Request) {
       if (!friendRequest) {
         return new Response('No friend request was made', { status: 404 });
       }
-    //   const existRelationship=await db.friends.findMany({
-    //     where:{
-    //         OR:[{friend:senderId,friendOf:session.user.id},{friend:session.user.id,friendOf:senderId}]
-    //     }
-    //   })
         await db.friends.create({
             data:{
                 friend:senderId,

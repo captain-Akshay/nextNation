@@ -1,17 +1,17 @@
 import {
     Card,
   } from "@/components/ui/Card"
-// import FriendComponent from "./FriendComponent";
-// import axios from "axios";
-// import { getAuthSession } from "@/lib/auth";
+import { Friends } from "@prisma/client";
+import ProfileFriendComp from "./ProfileFriendComp";
 
-async function FriendsList(){
-  // const session=await getAuthSession();
-  // const {data}= await axios.get(`http://localhost:3000/api/friendlist?id=${session?.user.id}`);
+async function FriendsList({data}:{data:Friends[]}){
   return <>
-    <Card className="w-[350px] h-64 overflow-y-auto">
-      {/* <FriendComponent data={data}/> */}
-      comming Soon!!
+    <Card className="w-[350px] h-80 overflow-y-auto">
+    <div className="px-4 py-2 text-lg font-bold text-gray-500 text-center">
+        Friends
+      </div>
+      {/*@ts-expect-error server component */}
+      {data.map((item,index)=>(<ProfileFriendComp key={index} id={item.friendOf} />))}
     </Card>
   </>
 }

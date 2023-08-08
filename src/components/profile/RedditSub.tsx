@@ -26,7 +26,7 @@ function RedditSub({name,id}:RedditSubProps){
             <RandomAvatar size={50} mode="random" name={name} />
             <div className={`text-sm pl-4 ${textColor}`}>
               <p className="leading-none">{name}</p>
-              <p className="text-gray-600">u/{id}</p>
+              <p className="text-gray-600">r/{id}</p>
             </div>
           </div>
         </div>
