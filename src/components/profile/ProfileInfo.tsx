@@ -1,5 +1,5 @@
 "use client"
-import { User,Post,Subscription,Subreddit } from "@prisma/client"
+import { User,Post,Subscription,Subreddit, Friends } from "@prisma/client"
 import type { Session } from 'next-auth'
 interface ProfileInfoProps {
   Profile: (User & {
@@ -8,6 +8,7 @@ interface ProfileInfoProps {
     createdSubreddits: Subreddit[];
 }) | null
 session?:Session |null
+friends:Friends[]
 }
 // Type 'User & { Post: Post[]; subscriptions: Subscription[]; createdSubreddits: Subreddit[]; }' 
 
@@ -30,18 +31,20 @@ import { toast } from "@/hooks/use-toast";
 import { useCustomToasts } from '@/hooks/use-custom-toasts'
 import { useRouter } from "next/navigation";
 
-export function ProfileInfo({Profile,session}:ProfileInfoProps){
+export function ProfileInfo({Profile,session,friends}:ProfileInfoProps){
   const { theme,setTheme } = useTheme();
   if (typeof window !== 'undefined') {
     setTheme(window.localStorage.getItem("theme")??"light");
   }else{
     setTheme("light")
   }
+
   const router = useRouter();
   const { loginToast } = useCustomToasts()
   const [sendIcon,setSendIcon]=React.useState(Icons.friendRequestSend)
   const textColorClass = theme === 'dark' ? 'text-white' : 'text-black';
   const bgColor = theme === 'dark' ? 'bg-gray-900' : 'bg-white';
+  
   const { mutate: sendFriendRequest} = useMutation({
     mutationFn: async () => {
       setSendIcon(Icons.friendRequestSent);
@@ -89,6 +92,13 @@ export function ProfileInfo({Profile,session}:ProfileInfoProps){
       })
     },
   })
+  let isFriend=false;
+  friends.map((item)=>{
+    if(item.friendOf===Profile?.id){
+      isFriend=true;
+    }
+  })
+
 
   return<>
     <div className={`mx-auto flex w-96 flex-col justify-center ${bgColor} rounded-2xl shadow-xl shadow-slate-300/60`}>
@@ -97,7 +107,7 @@ export function ProfileInfo({Profile,session}:ProfileInfoProps){
         <p className={`text-sm font-light pl-6 pb-4 ${textColorClass}`}>u/{Profile?.username}</p>
         <CardDescription className={`pl-4 ${textColorClass}`}>URverse user available to Connect!</CardDescription>
       <CardFooter className="flex justify-between">
-       {session&&session.user?.username!==Profile?.username&&
+       {session&&session.user?.username!==Profile?.username&&!isFriend&&
       <Button
       className={`rounded-full p-2  ${theme === 'dark' ? 'fill-white hover:bg-slate-700' : 'fill-black hover:bg-gray-200'}`}
       onClick={()=>sendFriendRequest()}

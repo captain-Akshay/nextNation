@@ -1,4 +1,5 @@
 # nextNation
+
 Something i m working on
 
 ## Building and deploying in production
@@ -8,10 +9,13 @@ If you wanted to run this site in production, you should install modules then bu
     npm install
     npm run build
     npm start
-  or
-  ```
-  yarn 
+
+or
+
 ```
+yarn
+```
+
 to install the Dependencies.
 
 You should run `npm run build` again any time you make changes to the site.
@@ -21,3 +25,5 @@ Note: If you are already running a webserver on port 80 (e.g. Macs usually have 
 ## Configuring
 
 If you configure a .env file over to '.env.example' and fill in the options) you can configure a range of options.
+
+to Generate security key :- openssl rand -base64 64 | 128

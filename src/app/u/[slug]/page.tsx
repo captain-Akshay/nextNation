@@ -34,7 +34,7 @@ async function page({params}:ProfileProps){
 <div className="py-14 flex flex-col lg:flex-row">
   <div className="w-full lg:w-1/4">
   <div className="ml-0 lg:ml-[-120px]"> 
-<ProfileInfo Profile={Person} session={session} />
+<ProfileInfo Profile={Person} session={session} friends={Friends}/>
 </div>
 </div>
 <div className="w-full lg:w-2/4 lg:mx-auto">
@@ -45,7 +45,7 @@ async function page({params}:ProfileProps){
 <div className="w-full lg:w-1/4 lg:ml-4 mt-8 lg:mt-0 flex flex-col space-y-8"> 
 <JoinedReddit subscriptions={Person?.subscriptions} />
 {/* @ts-ignore */}
-<FriendsList data={Friends} />
+<FriendsList data={Friends} isMyProfile={Person.id===session?.user.id} />
   </div>
 </div>
   );

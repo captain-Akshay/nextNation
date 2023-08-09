@@ -1,6 +1,7 @@
 "use client"
 import { useTheme } from "next-themes";
 import Image from "next/image";
+import Link from "next/link";
 
 interface ProfileFriendSubProps {
   name: string | null | undefined;
@@ -44,7 +45,8 @@ function ProfileFriendSub({ name, image, username }: ProfileFriendSubProps) {
           <div className="flex items-center">
             <div className={`text-sm pl-4 ${textColor}`}>
               <p className="leading-none">{name}</p>
-              <p className="text-gray-600">u/{username}</p>
+              <Link href={`/u/${username}`}><p className="text-gray-600">u/{username}</p>
+              </Link>
             </div>
           </div>
         </div>
