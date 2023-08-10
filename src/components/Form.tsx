@@ -1,16 +1,30 @@
+"use client";
+ 
+// You need to import our styles for the button to look right. Best to import in the root /layout.tsx but this is fine
+import {UploadButton} from "@uploadthing/react";
+import "@uploadthing/react/styles.css";
 import Link from "next/link";
 import { useTheme } from 'next-themes';
+import { OurFileRouter } from "@/app/api/uploadthing/core";
+import { Dispatch, SetStateAction, useState } from "react";
+import { Button } from "./ui/Button";
 
 interface FormProps {
   type: string;
   post: any;
   setPost: any;
   submitting: boolean;
+  setImage: Dispatch<SetStateAction<{
+    fileUrl: string;
+    fileKey: string;
+}[] | undefined>>
   handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
 }
 
-const Form: React.FC<FormProps> = ({ type, post, setPost, submitting, handleSubmit }) => {
+const Form: React.FC<FormProps> = ({ type, post, setPost, submitting, handleSubmit,setImage }) => {
   const { theme,setTheme } = useTheme();
+
+  const[upload,setUpload]=useState(false);
   if (typeof window !== 'undefined') {
     setTheme(window.localStorage.getItem("theme")??"light");
   }else{
@@ -70,7 +84,17 @@ const Form: React.FC<FormProps> = ({ type, post, setPost, submitting, handleSubm
             className={`form_input ${isDarkTheme ? 'bg-white bg-opacity-20' : 'bg-white bg-opacity-70'} rounded-lg p-2 focus:outline-none`}
           />
         </label>
-
+        {upload?<Button disabled>Uploaded</Button>:<UploadButton<OurFileRouter>
+        endpoint="imageUploader"
+        onClientUploadComplete={(res) => {
+          setImage(res);
+          setUpload(true);
+        }}
+        onUploadError={(error: Error) => {
+          console.log(error);
+        }}
+      />
+      }
         <div className='flex-end mx-3 mb-5 gap-4'>
           <Link href='/' className={`text-gray-500 text-sm ${isDarkTheme ? 'text-white' : 'text-black'}`}>
             Cancel
@@ -84,6 +108,7 @@ const Form: React.FC<FormProps> = ({ type, post, setPost, submitting, handleSubm
             {submitting ? `${type}ing...` : type}
           </button>
         </div>
+
       </form>
     </section>
   );

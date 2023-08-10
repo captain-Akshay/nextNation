@@ -12,27 +12,33 @@ const CreatePrompt = () => {
 
   const [submitting, setIsSubmitting] = useState(false);
   const [post, setPost] = useState({ prompt: "", tag: "" });
-
+  const [image,setImage]=useState<{
+    fileUrl: string;
+    fileKey: string;
+}[] | undefined>([]);
   const createPrompt = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
     const combinedTag = post.tag.replace(/#/g, ' ');
     try {
+      let imageURL:string="";
+      if(image){
+        imageURL=image[0].fileUrl
+      }
       const response = await fetch("/api/p/create", {
         method: "POST",
         body: JSON.stringify({
           prompt: post.prompt,
           userId: session?.user.id,
           tag: combinedTag,
+          image:imageURL
         }),
       });
   
       if (response.ok) {
-        console.log("Here");
         router.push("/");
       }
     } catch (error) {
-      console.log(error);
     } finally {
       setIsSubmitting(false);
     }
@@ -46,6 +52,7 @@ const CreatePrompt = () => {
       setPost={setPost}
       submitting={submitting}
       handleSubmit={createPrompt}
+      setImage={setImage}
     />
     </>
   );

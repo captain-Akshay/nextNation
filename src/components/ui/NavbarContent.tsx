@@ -12,11 +12,12 @@ import logoDark from "@/components/ui/logo-dark.png"
 //------------------------LOGO---------------------------
 export function NavbarLogo() {
     const { theme,setTheme } = useTheme();
+    useEffect(()=>{
     if (typeof window !== 'undefined') {
-      setTheme(window.localStorage.getItem("theme")??"light");
+      setTheme(JSON.stringify(window.localStorage.getItem("theme"))??"light");
     }else{
       setTheme("light")
-    }
+    }},[]);
     const logoTextColor = theme === 'dark' ? 'text-white' : 'text-zinc-900';
   
     return (

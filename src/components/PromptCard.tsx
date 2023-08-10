@@ -51,7 +51,7 @@ const PromptCard = ({ post }: { post: Prompt }) => {
           />
         </div>
       </div>
-
+      {post.image.length>0&&<Image alt="PROMPT RESULT" src={post.image} width={200} height={200} />}
       {/* Display the prompt body text */}
       <p className={`my-4 font-satoshi text-sm text-${theme === "light" ? "black" : "white"}`}>{post.body}</p>
 

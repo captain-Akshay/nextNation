@@ -71,6 +71,7 @@ model Prompt {
   authorId  String
   body      String
   tags      String
+  image     String
 }
 
 model Subreddit {

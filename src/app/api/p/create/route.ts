@@ -4,7 +4,7 @@ import { z } from 'zod'
 
 export async function POST(req: Request) {
   try {
-    const { userId, prompt, tag } = await req.json();
+    const { userId, prompt, tag,image } = await req.json();
 
     const session = await getAuthSession()
     if (!session?.user) {
@@ -14,7 +14,8 @@ export async function POST(req: Request) {
         data:{
             body:prompt,
             authorId:userId,
-            tags:tag
+            tags:tag,
+            image:image
         }
     })
     return new Response(JSON.stringify(newPrompt), { status: 201 })

@@ -16,7 +16,6 @@ import * as React from "react"
 import { Icons } from "../Icon";
 import { Button } from "@/components/ui/Button"
 import {
-  Card,
   CardDescription,
   CardFooter,
   CardTitle,
@@ -29,7 +28,6 @@ import axios, { AxiosError } from "axios";
 import { toast } from "@/hooks/use-toast";
 
 import { useCustomToasts } from '@/hooks/use-custom-toasts'
-import { useRouter } from "next/navigation";
 
 export function ProfileInfo({Profile,session,friends}:ProfileInfoProps){
   const { theme,setTheme } = useTheme();
@@ -38,8 +36,6 @@ export function ProfileInfo({Profile,session,friends}:ProfileInfoProps){
   }else{
     setTheme("light")
   }
-
-  const router = useRouter();
   const { loginToast } = useCustomToasts()
   const [sendIcon,setSendIcon]=React.useState(Icons.friendRequestSend)
   const textColorClass = theme === 'dark' ? 'text-white' : 'text-black';
