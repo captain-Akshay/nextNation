@@ -100,7 +100,6 @@ const SearchBar: FC<SearchBarProps> = ({}) => {
         value={input}
         className='outline-none border-none focus:border-none focus:outline-none ring-0'
         placeholder={prefix?"":"Search communities (/r) or users (/u)..."}
-        style={{ borderRadius: '9999px 9999px 0 0' }}
       />
       </div>
       {input.length > 0 && (
