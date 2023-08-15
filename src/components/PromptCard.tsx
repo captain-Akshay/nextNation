@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { Prompt } from "@prisma/client";
 import tick from "@/icons/tick.svg";
@@ -11,11 +11,12 @@ const PromptCard = ({ post }: { post: Prompt }) => {
   const [copied, setCopied] = useState('');
   const { theme,setTheme } = useTheme();
   const Tags=post.tags.split("#")
-  if (typeof window !== 'undefined') {
-    setTheme(window.localStorage.getItem("theme")??"light");
-  }else{
-    setTheme("light")
-  }
+  useEffect(()=>{
+    if (typeof window !== 'undefined') {
+      setTheme(JSON.stringify(window.localStorage.getItem("theme")));
+    }else{
+      setTheme("light")
+    }},[]);
   const handleProfileClick = () => {
     // Implement your logic for handling profile clicks
   };

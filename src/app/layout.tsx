@@ -10,7 +10,7 @@ import Providers from '@/components/Providers'
 
 export const metadata = {
   title: 'URverse',
-  description: 'A Reddit clone built with Next.js and TypeScript.',
+  description: 'Your Verse to connect with Tech Leads engage with conversation with them and grow together!',
 }
 
 
