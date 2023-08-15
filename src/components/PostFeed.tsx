@@ -4,7 +4,7 @@ import { ExtendedPost } from '@/types/db'
 import { useInfiniteQuery } from '@tanstack/react-query'
 import axios from 'axios'
 import { Loader2 } from 'lucide-react'
-import { FC } from 'react'
+import { FC, useState } from 'react'
 import Post from './Post'
 import { useSession } from 'next-auth/react'
 import { Button } from './ui/Button'
@@ -16,7 +16,7 @@ interface PostFeedProps {
 
 const PostFeed: FC<PostFeedProps> = ({ initialPosts, subredditName }) => {
   const { data: session } = useSession()
-
+  const [fetchSuccessful,setfetchSuccessfull]=useState(true);
   const { data, fetchNextPage, isFetchingNextPage } = useInfiniteQuery(
     ['infinite-query'],
     async ({ pageParam = 1 }) => {
@@ -25,6 +25,7 @@ const PostFeed: FC<PostFeedProps> = ({ initialPosts, subredditName }) => {
         (!!subredditName ? `&subredditName=${subredditName}` : '')
 
       const { data } = await axios.get(query)
+      if(data.length==0)setfetchSuccessfull(false);
       return data as ExtendedPost[]
     },
     {
@@ -81,7 +82,7 @@ const PostFeed: FC<PostFeedProps> = ({ initialPosts, subredditName }) => {
           <Loader2 className='w-6 h-6 text-zinc-500 animate-spin' />
         </li>
       )}
-          <Button onClick={()=>fetchNextPage()}>Load More</Button>
+          {initialPosts&&fetchSuccessful&&<Button onClick={()=>fetchNextPage()}>Load More</Button>}
     </ul>
 
   )
