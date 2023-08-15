@@ -28,7 +28,7 @@ const PromptCard = ({ post }: { post: Prompt }) => {
   };
 
   return (
-    <div className={`prompt_card bg-${theme === "light" ? "white" : "gray-800"} rounded-lg p-4 border border-white my-3`}>
+    <div className={`prompt_card bg-${theme === "dark" ?"gray-800":"white" } rounded-lg p-4 border border-white my-3`}>
       <div className='flex justify-between items-start gap-5'>
         {/* Profile section (not implemented) */}
         <div
@@ -54,7 +54,7 @@ const PromptCard = ({ post }: { post: Prompt }) => {
       </div>
       {post.image.length>0&&<Image alt="PROMPT RESULT" src={post.image} width={200} height={200} />}
       {/* Display the prompt body text */}
-      <p className={`my-4 font-satoshi text-sm text-${theme === "light" ? "black" : "white"}`}>{post.body}</p>
+      <p className={`my-4 font-satoshi text-sm text-${theme === "dark" ? "white":"black"}`}>{post.body}</p>
 
       {/* Display the prompt tags */}
       {Tags.map((item,index)=>{

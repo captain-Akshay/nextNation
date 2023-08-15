@@ -6,11 +6,12 @@ import PromptCard from './PromptCard';
 import { Prompt } from '@prisma/client';
 const PromptSearchBar = () => {
   const { theme,setTheme } = useTheme();
-  if (typeof window !== 'undefined') {
-    setTheme(window.localStorage.getItem("theme")??"light");
-  }else{
-    setTheme("light")
-  }
+  useEffect(()=>{
+    if (typeof window !== 'undefined') {
+      setTheme(JSON.stringify(window.localStorage.getItem("theme")));
+    }else{
+      setTheme("light");
+    }},[]);
   const [input, setInput] = useState('');
   const [tags, setTags] = useState<string[]>([]);
   const [prompts,setprompts]=useState<Prompt[]>([])
@@ -22,6 +23,11 @@ const PromptSearchBar = () => {
     const fetchPopularTags = async () => {
       try {
         // Convert the 'tags' state to a comma-separated string.
+        if (typeof window !== 'undefined') {
+          setTheme(JSON.stringify(window.localStorage.getItem("theme")));
+        }else{
+          setTheme("light");
+        }
         const tagsString = tags.join(',');
   
         // Build the fetch URL with the tags as query parameters.
@@ -32,13 +38,12 @@ const PromptSearchBar = () => {
         }
   
         const data = await response.json();
-        setprompts(data)
+        setprompts(data);
+
       } catch (error) {
         console.error("Error fetching popular tags:", error);
       }
     };
-  
-    // Call the fetch function when the component mounts or when 'tags' state changes.
     fetchPopularTags();
   }, [tags]);
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -65,7 +70,7 @@ const PromptSearchBar = () => {
     inputBorder: 'border-gray-300',
     inputText: 'text-black',
     tagBackground: 'bg-blue-500',
-    tagTextColor: 'text-white',
+    tagTextColor: 'text-black',
     popularTagBorder: 'border-blue-500',
     popularTagBackground: 'bg-blue-500',
     popularTagTextColor: 'text-black',
@@ -84,11 +89,11 @@ const PromptSearchBar = () => {
     popularTagShinyBackground: 'bg-gradient-to-r from-black to-transparent',
   };
 
-  const themeColors = theme === 'light' ? lightThemeColors : darkThemeColors;
+  const themeColors = theme === 'dark' ?darkThemeColors:lightThemeColors;
 
   return (
     // <HexagonBackground>
-    <div className={`relative ${themeColors.containerBackground}`}>
+    <div className={`relative ${themeColors.containerBackground} `}>
       <input
         type="text"
         value={input}

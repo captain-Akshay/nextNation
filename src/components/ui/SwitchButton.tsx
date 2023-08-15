@@ -1,14 +1,6 @@
 "use client"
 import React from "react";
-import { useTheme } from "next-themes";
-
-const Switch = ({ isOn, handleToggle, type }:{isOn:boolean,handleToggle:() => void,type:string}) => {
-  const { theme,setTheme } = useTheme();
-  if (typeof window !== 'undefined') {
-    setTheme(window.localStorage.getItem("theme")??"light");
-  }else{
-    setTheme("light")
-  }
+const Switch = ({ isOn, handleToggle, type,theme }:{isOn:boolean,handleToggle:() => void,type:string,theme:string}) => {
   return (
 <div
       className={`switch relative w-32 h-8 rounded-full ${
@@ -42,9 +34,7 @@ const Switch = ({ isOn, handleToggle, type }:{isOn:boolean,handleToggle:() => vo
   );
 };
 
-const SwitchButton = ({isOn,setType,setIsOn,type}:{isOn: boolean,setType: React.Dispatch<React.SetStateAction<string>>,setIsOn: React.Dispatch<React.SetStateAction<boolean>>,type:string}) => {
-
-
+const SwitchButton = ({isOn,setType,setIsOn,type,theme}:{isOn: boolean,setType: React.Dispatch<React.SetStateAction<string>>,setIsOn: React.Dispatch<React.SetStateAction<boolean>>,type:string,theme:string}) => {
   const handleToggle = () => {
     setType((prev) => {
       if (prev === "prompt") {
@@ -56,6 +46,6 @@ const SwitchButton = ({isOn,setType,setIsOn,type}:{isOn: boolean,setType: React.
     setIsOn(!isOn);
   };
 
-  return <Switch isOn={isOn} handleToggle={handleToggle} type={type} />;
+  return <Switch isOn={isOn} handleToggle={handleToggle} type={type} theme={theme}/>;
 };
 export default SwitchButton;

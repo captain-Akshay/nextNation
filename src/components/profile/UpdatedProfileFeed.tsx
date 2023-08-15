@@ -18,12 +18,7 @@ export default async function UpdatedProfileFeed({id}:ProfilePostFeedProps){
           subreddit: true,
         },
       })
-      const prompts=await db.prompt.findMany({
-        where:{
-            authorId:id??undefined
-        }
-      });
       return <div>
-        <UpdatedPostPromptFeed posts={posts} prompts={prompts}/>
+        <UpdatedPostPromptFeed posts={posts}/>
       </div>
 }

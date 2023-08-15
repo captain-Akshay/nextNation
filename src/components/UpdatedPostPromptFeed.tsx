@@ -1,24 +1,17 @@
 "use client"
-import React, { useState } from 'react'
-import SwitchButton from './ui/SwitchButton'
+import React from 'react'
 import { ExtendedPost } from '@/types/db';
-import { Prompt } from '@prisma/client';
 import Post from './Post';
 import { useSession } from 'next-auth/react';
-import PromptCard from './PromptCard';
 interface Props{
     posts:ExtendedPost[],
-    prompts:Prompt[]
 }
-function UpdatedPostPromptFeed({posts,prompts}:Props) {
+function UpdatedPostPromptFeed({posts}:Props) {
     const { data: session } = useSession();
-    const [isOn, setIsOn] = useState(false);
-    const [type, setType] = useState("prompt");
   return (
     <div>
-    <SwitchButton isOn={isOn} setIsOn={setIsOn} type={type} setType={setType}/>
-    {isOn?<ul className='flex flex-col col-span-2 space-y-6'>
-      {posts.map((post, index) => {
+    <ul className='flex flex-col col-span-2 space-y-6'>
+      {posts.map((post) => {
         const votesAmt = post.votes.reduce((acc, vote) => {
           if (vote.type === 'UP') return acc + 1
           if (vote.type === 'DOWN') return acc - 1
@@ -38,7 +31,7 @@ function UpdatedPostPromptFeed({posts,prompts}:Props) {
               currentVote={currentVote}
             />
             </li>)})}
-        </ul>:<>{prompts.map((item,index)=>(< PromptCard post={item} key={index}/>))}</>}        
+        </ul>   
     </div>
   )
 }
