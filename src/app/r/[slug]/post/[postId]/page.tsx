@@ -37,8 +37,7 @@ const SubRedditPostPage = async ({ params }: SubRedditPostPageProps) => {
     })
   }
 
-  if (!post && !cachedPost) return notFound()
-
+  if (!post && !cachedPost) return notFound();
   return (
     <div className="rounded-md">
       <PostProvider>

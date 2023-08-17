@@ -62,7 +62,7 @@ export function NavbarProvider({ children }: { children: React.ReactNode }) {
           theme === 'dark' ? 'bg-black' : 'bg-zinc-100'
         } border-b ${theme === 'dark' ? 'bg-black' : 'border-zinc-300'} z-[10] py-2`}
       >
-        <div className="container max-w-7xl h-full mx-auto flex items-center justify-between gap-2">
+        <div className="container  max-w-full h-full mx-auto flex items-center justify-between gap-2">
           {children}
         </div>
       </div>

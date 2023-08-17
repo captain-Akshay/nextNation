@@ -5,6 +5,8 @@ import { getServerSession } from 'next-auth'
 import { NavbarButton,NavbarProvider,NightComponent,NavbarLogo } from '@/components/ui/NavbarContent'
 import Notification from './notification/Notification'
 import Myprofile from './Myprofile'
+import PlayGroundButton from './playground/PlayGroundButton'
+import BrowseCommunity from "@/components/BrowseCommunity"
 const Navbar = async () => {
   const session = await getServerSession(authOptions);
   return (
@@ -22,9 +24,12 @@ const Navbar = async () => {
          {/* @ts-expect-error server component*/}
          <Notification />
          </>
-         ) : (
-          <NavbarButton/>)}
-          
+         ) : (<>
+          <NavbarButton/>
+          <PlayGroundButton/>
+          <BrowseCommunity />
+          </>
+          )}
           <NightComponent />
 
       </div>

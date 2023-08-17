@@ -56,6 +56,9 @@ export function UserAccountNav({ user }: UserAccountNavProps) {
           <Link href='/p'>Prompts</Link>
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
+          <Link href='/playground'>PlayGround</Link>
+        </DropdownMenuItem>
+        <DropdownMenuItem asChild>
           <Link href='/r'>Communities</Link>
         </DropdownMenuItem>
         <DropdownMenuItem asChild>

@@ -38,22 +38,29 @@ export const PostProviderSub = ({children,post,cachedPost}:PostProviderSubProps)
     // Set colors based on the current theme
     const containerBgColor = theme === 'dark' ? 'bg-zinc-900' : 'bg-white';
     const containerTextColor = theme === 'dark' ? 'text-white' : 'text-gray-900';
-  
+    const code = post?.content?.blocks[0].data.code;
     return (
       <div className={`sm:w-0 w-full flex-1 ${containerBgColor} pr-4 pt-4 pb-4 rounded-sm `}>
         <p className='max-h-40 mt-1 truncate text-xs text-gray-500'>
           Posted by u/{post?.author.username ?? cachedPost.authorUsername}{' '}
           {formatTimeToNow(new Date(post?.createdAt ?? cachedPost.createdAt))}
         </p>
+        <div className='flex flex-row justify-between'>
         <h1 className={`text-xl font-semibold py-2 leading-6 ${containerTextColor}`}>
           {post?.title ?? cachedPost.title}
         </h1>
+        {code&&<span className=' pb-2'>    <Button className='outline self-end'>
+      <Link href={`/playground?code=${encodeURIComponent(code)}`}  className={` ${containerTextColor}`}>Open in PlayGround</Link>
+    </Button>
+        </span>}
+        </div>
         {children}
       </div>
     );
   };
-  import { buttonVariants } from '@/components/ui/Button';
+  import { Button, buttonVariants } from '@/components/ui/Button';
   import { ArrowBigUp, ArrowBigDown, Loader2 } from 'lucide-react';
+import Link from 'next/link';
   
   export function PostVoteShell(){
     const { theme,setTheme } = useTheme();

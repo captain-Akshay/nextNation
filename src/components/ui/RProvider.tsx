@@ -21,10 +21,10 @@ export default function RProvider({subreddit,memberCount,slug,children,session,i
     }
     // Set colors based on the current theme
     const textColor = theme === 'dark' ? 'text-white' : 'text-black';
-    const bgColor = theme === 'dark' ? 'bg-black' : 'bg-white';
+    const bgColor = theme === 'dark' ? 'bg-black' : 'border-zinc-300';
     const borderColor = theme === 'dark' ? 'border-white' : 'border-black';
 
-    return(<div className={`sm:container max-w-7xl mx-auto h-full pt-12 ${bgColor}`}>
+    return(<div className={`sm:container max-w-7xl mx-auto h-screen pt-12 ${bgColor}`}>
     <div>
       <ToFeedButton />
 
