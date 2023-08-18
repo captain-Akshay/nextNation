@@ -7,7 +7,7 @@ interface PreviewProps {
   code: string;
 }
 
-const PreviewCpp: React.FC<PreviewProps> = ({ code }) => {
+const PreviewPython: React.FC<PreviewProps> = ({ code }) => {
     const [result, setResult] = useState<string>("");
 
     const options = {
@@ -53,5 +53,5 @@ const PreviewCpp: React.FC<PreviewProps> = ({ code }) => {
     );
   };
   
-  export default PreviewCpp;
+  export default PreviewPython;
   

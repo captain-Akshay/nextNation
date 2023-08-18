@@ -5,7 +5,7 @@ import Preview from "./Preview";
 import { useSearchParams } from 'next/navigation'
 import { useTheme } from "next-themes";
 import PreviewJava from "./PreviewJava";
-import PreviewCpp from "./PreviewCpp";
+import PreviewPython from "./PreviewPython";
 import Image from "next/image";
 function CodeEditor(){
     const searchParams = useSearchParams();
@@ -76,7 +76,7 @@ function CodeEditor(){
     <h2  className={`${theme==="dark"?"text-white":"text-black"}text-2xl mb-4`}>Output</h2>
    {filterSelected==="javascript"&&<Preview code={code} err={''} />}
     {filterSelected==="java"&&<PreviewJava code={otherCode}/>}
-    {filterSelected==="python"&&<PreviewCpp code={otherCode}/>}
+    {filterSelected==="python"&&<PreviewPython code={otherCode}/>}
   </div>
 </div>);
   };
