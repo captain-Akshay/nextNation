@@ -12,7 +12,7 @@ const PreviewJava: React.FC<PreviewProps> = ({ code }) => {
       url: 'https://java-code-compiler.p.rapidapi.com/',
       headers: {
         'content-type': 'application/json',
-        'X-RapidAPI-Key': process.env.RapidAPI,
+        'X-RapidAPI-Key': process.env.RAPID_API_KEY,
         'X-RapidAPI-Host': 'java-code-compiler.p.rapidapi.com'
       },
       data: {

@@ -9,13 +9,12 @@ interface PreviewProps {
 
 const PreviewPython: React.FC<PreviewProps> = ({ code }) => {
     const [result, setResult] = useState<string>("");
-
     const options = {
         method: 'POST',
         url: 'https://python-3-code-compiler.p.rapidapi.com/',
         headers: {
           'content-type': 'application/json',
-          'X-RapidAPI-Key': process.env.RapidAPI,
+          'X-RapidAPI-Key': process.env.RAPID_API_KEY,
           'X-RapidAPI-Host': 'python-3-code-compiler.p.rapidapi.com'
         },
         data: {

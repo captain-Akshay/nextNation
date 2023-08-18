@@ -12,6 +12,9 @@ const nextConfig = {
   experimental: {
     appDir: true,
   },
+  env: {
+    RAPID_API_KEY: "4c899a9c92mshd3501ee265975f8p18465cjsnaafcfb705204",
+  },
 };
 
 module.exports = nextConfig;
