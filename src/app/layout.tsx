@@ -23,8 +23,8 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang='en' className={cn("bg-white text-slate-900 antialiased light",inter.className)}>
-      <body className='min-h-screen bg-slate-50 antialiased'>
+    <html lang='en' className={cn("bg-zinc-100 text-slate-900 antialiased light",inter.className)}>
+      <body className='min-h-screen bg-zinc-100 antialiased'>
         <ThemePro>
           <Providers>
           <HomeProvider>
