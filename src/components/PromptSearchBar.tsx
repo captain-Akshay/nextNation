@@ -8,7 +8,7 @@ const PromptSearchBar = () => {
   const { theme,setTheme } = useTheme();
   useEffect(()=>{
     if (typeof window !== 'undefined') {
-      setTheme(JSON.stringify(window.localStorage.getItem("theme")));
+      setTheme(window.localStorage.getItem("theme")??"light");
     }else{
       setTheme("light");
     }},[]);
@@ -24,7 +24,7 @@ const PromptSearchBar = () => {
       try {
         // Convert the 'tags' state to a comma-separated string.
         if (typeof window !== 'undefined') {
-          setTheme(JSON.stringify(window.localStorage.getItem("theme")));
+          setTheme(window.localStorage.getItem("theme")??"light");
         }else{
           setTheme("light");
         }

@@ -9,7 +9,13 @@ import { useMutation } from '@tanstack/react-query';
 import { useTheme } from 'next-themes';
 
 function Community() {
-  const { theme } = useTheme(); 
+  const { theme,setTheme } = useTheme(); 
+  useEffect(()=>{
+    if (typeof window !== 'undefined') {
+      setTheme(window.localStorage.getItem("theme")??"light");
+    }else{
+      setTheme("light")
+    }},[]);
   const { toast } = useToast();
   const { loginToast } = useCustomToasts();
   const [filterSelected, setFilterSelected] = useState('popular');

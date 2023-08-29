@@ -4,14 +4,16 @@ import UserAuthForm from '@/components/UserAuthForm'
 import Link from 'next/link'
 
 import { useTheme } from 'next-themes';
+import { useEffect } from 'react';
 
 const SignIn = () => {
   const { theme,setTheme } = useTheme();
-  if (typeof window !== 'undefined') {
-    setTheme(window.localStorage.getItem("theme")??"light");
-  }else{
-    setTheme("light")
-  }
+  useEffect(()=>{
+    if (typeof window !== 'undefined') {
+      setTheme(window.localStorage.getItem("theme")??"light");
+    }else{
+      setTheme("light")
+    }},[]);
 
   const containerClass = theme === 'dark' ? 'text-white' : 'text-black';
   const linkClass = theme === 'dark' ? 'text-brand' : 'text-[#0070f3]';

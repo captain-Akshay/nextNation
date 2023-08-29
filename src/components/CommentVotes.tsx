@@ -1,5 +1,5 @@
 'use client'
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { useTheme } from 'next-themes';
 import { useCustomToasts } from '@/hooks/use-custom-toasts';
 import { cn } from '@/lib/utils';
@@ -26,11 +26,12 @@ const CommentVotes: FC<CommentVotesProps> = ({
   currentVote: _currentVote,
 }) => {
   const { theme,setTheme } = useTheme();
-  if (typeof window !== 'undefined') {
-    setTheme(window.localStorage.getItem("theme")??"light");
-  }else{
-    setTheme("light")
-  }
+  useEffect(()=>{
+    if (typeof window !== 'undefined') {
+      setTheme(window.localStorage.getItem("theme")??"light");
+    }else{
+      setTheme("light")
+    }},[]);
   const { loginToast } = useCustomToasts();
   const [votesAmt, setVotesAmt] = useState<number>(_votesAmt);
   const [currentVote, setCurrentVote] = useState<PartialVote | undefined>(

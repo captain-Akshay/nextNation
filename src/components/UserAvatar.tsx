@@ -37,6 +37,7 @@ import { useTheme } from 'next-themes';
 import { Icons } from '@/components/Icon';
 import { Avatar, AvatarFallback } from '@/components/ui/Avatar';
 import Image from 'next/image';
+import { useEffect } from 'react';
 
 interface UserAvatarProps extends AvatarProps {
   user: Pick<User, 'image' | 'name'>;
@@ -44,12 +45,12 @@ interface UserAvatarProps extends AvatarProps {
 
 export function UserAvatar({ user, ...props }: UserAvatarProps) {
   const { theme,setTheme } = useTheme();
-  if (typeof window !== 'undefined') {
-    setTheme(window.localStorage.getItem("theme")??"light");
-  }else{
-    setTheme("light")
-  }
-  // Theme-specific ring class
+  useEffect(()=>{
+    if (typeof window !== 'undefined') {
+      setTheme(window.localStorage.getItem("theme")??"light");
+    }else{
+      setTheme("light")
+    }},[]);
   const ringClass = theme === 'dark' ? 'ring-white' : 'ring-blue';
 
   return (

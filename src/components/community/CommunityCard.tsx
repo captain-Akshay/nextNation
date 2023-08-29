@@ -1,6 +1,7 @@
+"use client"
 import { formatTimeToNow } from '@/lib/utils'
 import Image from 'next/image'
-import { FC } from 'react'
+import { FC, useEffect } from 'react'
 import {useTheme} from "next-themes";
 import Link from 'next/link';
 interface CommunityCardProps {
@@ -12,7 +13,13 @@ interface CommunityCardProps {
 
 const CommunityCard: FC<CommunityCardProps> = ({itemname,created,creator,id}) => {
     let randomNumber=Math.round(Math.random()*16)
-    const {theme}=useTheme();
+    const {theme,setTheme}=useTheme();
+    useEffect(()=>{
+      if (typeof window !== 'undefined') {
+        setTheme(window.localStorage.getItem("theme")??"light");
+      }else{
+        setTheme("light")
+      }},[]);
     return (
         <Link href={`/r/${itemname}`}>
         <div

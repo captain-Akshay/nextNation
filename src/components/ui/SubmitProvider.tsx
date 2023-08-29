@@ -1,13 +1,19 @@
 "use client"
 import { useTheme } from 'next-themes';
+import { useEffect } from 'react';
 
 interface PageProps {
       slug: string;
   }
 
 const SubmitProvider = ({slug}:PageProps) => {
-    const { theme } = useTheme();
-  // Set colors based on the current theme
+    const { theme,setTheme } = useTheme();
+    useEffect(()=>{
+      if (typeof window !== 'undefined') {
+        setTheme(window.localStorage.getItem("theme")??"light");
+      }else{
+        setTheme("light")
+      }},[]);
   const textColor = theme === 'dark' ? 'text-white' : 'text-black';
   const borderColor = theme === 'dark' ? 'border-gray-700' : 'border-gray-200';
 

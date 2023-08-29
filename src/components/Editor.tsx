@@ -24,12 +24,12 @@ interface EditorProps {
 
 export const Editor: React.FC<EditorProps> = ({ subredditId }) => {
   const { theme,setTheme } = useTheme();
-  if (typeof window !== 'undefined') {
-    setTheme(window.localStorage.getItem("theme")??"light");
-  }else{
-    setTheme("light")
-  }
-  // Set colors based on the current theme
+  useEffect(()=>{
+    if (typeof window !== 'undefined') {
+      setTheme(window.localStorage.getItem("theme")??"light");
+    }else{
+      setTheme("light")
+    }},[]);
   const bgColor = theme === 'dark' ? 'bg-gray-900' : 'bg-zinc-50';
   const borderColor = theme === 'dark' ? 'border-gray-700' : 'border-zinc-200';
   const textColor = theme === 'dark' ? 'text-white' : 'text-black';

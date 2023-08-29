@@ -4,7 +4,7 @@ import { formatTimeToNow } from '@/lib/utils';
 import { Post, User, Vote } from '@prisma/client';
 import { MessageSquare } from 'lucide-react';
 import Link from 'next/link';
-import { FC, useRef } from 'react';
+import { FC, useEffect, useRef } from 'react';
 import PostVoteClient from './post-vote/PostVoteClient';
 import { useTheme } from 'next-themes';
 
@@ -30,11 +30,12 @@ const Post: FC<PostProps> = ({
 }) => {
   const pRef = useRef<HTMLParagraphElement>(null);
   const { theme,setTheme } = useTheme();
-  if (typeof window !== 'undefined') {
-    setTheme(window.localStorage.getItem("theme")??"light");
-  }else{
-    setTheme("light")
-  }
+  useEffect(()=>{
+    if (typeof window !== 'undefined') {
+      setTheme(window.localStorage.getItem("theme")??"light");
+    }else{
+      setTheme("light")
+    }},[]);
 
   // Set colors based on the current theme
   const bgColor = theme === 'dark' ? 'bg-gray-900' : 'bg-white';

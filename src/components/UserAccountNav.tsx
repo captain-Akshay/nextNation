@@ -11,6 +11,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/DropDownMenu';
 import { UserAvatar } from '@/components/UserAvatar';
+import { useEffect } from 'react';
 
 interface UserAccountNavProps{
   user: User;
@@ -18,12 +19,12 @@ interface UserAccountNavProps{
 
 export function UserAccountNav({ user }: UserAccountNavProps) {
   const { theme,setTheme } = useTheme();
-  if (typeof window !== 'undefined') {
-    setTheme(window.localStorage.getItem("theme")??"light");
-  }else{
-    setTheme("light")
-  }
-  // console.log(user);
+  useEffect(()=>{
+    if (typeof window !== 'undefined') {
+      setTheme(window.localStorage.getItem("theme")??"light");
+    }else{
+      setTheme("light")
+    }},[]);
 
   // Theme-specific class names
   const bgClass = theme === 'dark' ? 'bg-black' : 'bg-white';

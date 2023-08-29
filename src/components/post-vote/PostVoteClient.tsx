@@ -28,11 +28,12 @@ const PostVoteClient = ({
   const [currentVote, setCurrentVote] = useState(initialVote)
   const prevVote = usePrevious(currentVote)
   const { theme,setTheme } = useTheme();
-  if (typeof window !== 'undefined') {
-    setTheme(window.localStorage.getItem("theme")??"light");
-  }else{
-    setTheme("light")
-  }
+  useEffect(()=>{
+    if (typeof window !== 'undefined') {
+      setTheme(window.localStorage.getItem("theme")??"light");
+    }else{
+      setTheme("light")
+    }},[]);
   const textColor = theme === 'dark' ? 'text-white' : 'text-black';
   // ensure sync with server
   useEffect(() => {

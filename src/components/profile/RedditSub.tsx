@@ -1,6 +1,7 @@
 "use client"
 import { RandomAvatar } from "react-random-avatars";
 import { useTheme } from "next-themes";
+import { useEffect } from "react";
 
 interface RedditSubProps {
   name:string | undefined,
@@ -9,11 +10,12 @@ interface RedditSubProps {
 
 function RedditSub({name,id}:RedditSubProps){
   const { theme,setTheme } = useTheme();
-  if (typeof window !== 'undefined') {
-    setTheme(window.localStorage.getItem("theme")??"light");
-  }else{
-    setTheme("light")
-  }
+  useEffect(()=>{
+    if (typeof window !== 'undefined') {
+      setTheme(window.localStorage.getItem("theme")??"light");
+    }else{
+      setTheme("light")
+    }},[]);
 
   const backgroundColor = theme === 'dark' ? 'bg-gray-900' : 'bg-white';
   const textColor = theme === 'dark' ? 'text-white' : 'text-gray-900';

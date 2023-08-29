@@ -13,12 +13,12 @@ interface PostProviderSubProps {
 
   export const PostProvider= ({ children }:PostProviderProps) => {
     const { theme,setTheme } = useTheme();
-    if (typeof window !== 'undefined') {
-      setTheme(window.localStorage.getItem("theme")??"light");
-    }else{
-      setTheme("light")
-    }
-  
+    useEffect(()=>{
+      if (typeof window !== 'undefined') {
+        setTheme(window.localStorage.getItem("theme")??"light");
+      }else{
+        setTheme("light")
+      }},[]);
     // Set colors based on the current theme
     const containerBgColor = theme === 'dark' ? 'bg-zinc-900' : 'bg-white';
     const containerTextColor = theme === 'dark' ? 'text-white' : 'text-gray-900';
@@ -61,6 +61,7 @@ export const PostProviderSub = ({children,post,cachedPost}:PostProviderSubProps)
   import { Button, buttonVariants } from '@/components/ui/Button';
   import { ArrowBigUp, ArrowBigDown, Loader2 } from 'lucide-react';
 import Link from 'next/link';
+import { useEffect } from 'react';
   
   export function PostVoteShell(){
     const { theme,setTheme } = useTheme();

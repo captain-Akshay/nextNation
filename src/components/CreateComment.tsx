@@ -6,7 +6,7 @@ import { useCustomToasts } from '@/hooks/use-custom-toasts';
 import { useMutation } from '@tanstack/react-query';
 import axios, { AxiosError } from 'axios';
 import { useRouter } from 'next/navigation';
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { Label } from '@/components/ui/Label';
 import { Textarea } from '@/components/ui/Textarea';
 import { useTheme } from 'next-themes';
@@ -21,12 +21,12 @@ const CreateComment: FC<CreateCommentProps> = ({ postId, replyToId }) => {
   const router = useRouter();
   const { loginToast } = useCustomToasts();
   const { theme,setTheme } = useTheme();
-  if (typeof window !== 'undefined') {
-    setTheme(window.localStorage.getItem("theme")??"light");
-  }else{
-    setTheme("light")
-  }
-
+  useEffect(()=>{
+    if (typeof window !== 'undefined') {
+      setTheme(window.localStorage.getItem("theme")??"light");
+    }else{
+      setTheme("light")
+    }},[]);
   const { mutate: comment, isLoading } = useMutation({
     mutationFn: async ({ postId, text, replyToId }: CommentRequest) => {
       const payload: CommentRequest = { postId, text, replyToId };

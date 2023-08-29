@@ -12,11 +12,12 @@ const UserAuthForm: FC<UserAuthFormProps> = ({ className, ...props }) => {
   const { toast } = useToast()
   const [isLoading, setIsLoading] = React.useState<boolean>(false)
   const { theme,setTheme } = useTheme();
-  if (typeof window !== 'undefined') {
-    setTheme(window.localStorage.getItem("theme")??"light");
-  }else{
-    setTheme("light")
-  }
+  React.useEffect(()=>{
+    if (typeof window !== 'undefined') {
+      setTheme(window.localStorage.getItem("theme")??"light");
+    }else{
+      setTheme("light")
+    }},[]);
   const loginWithGoogle = async () => {
     setIsLoading(true)
 

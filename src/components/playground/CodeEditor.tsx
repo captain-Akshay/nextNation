@@ -16,7 +16,7 @@ function CodeEditor(){
     const { theme,setTheme } = useTheme();
     useEffect(()=>{
       if (typeof window !== 'undefined') {
-        setTheme(JSON.stringify(window.localStorage.getItem("theme")));
+        setTheme(window.localStorage.getItem("theme")??"light");
       }else{
         setTheme("light")
       }},[]);

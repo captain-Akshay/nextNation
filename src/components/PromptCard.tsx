@@ -13,7 +13,7 @@ const PromptCard = ({ post }: { post: Prompt }) => {
   const Tags=post.tags.split("#")
   useEffect(()=>{
     if (typeof window !== 'undefined') {
-      setTheme(JSON.stringify(window.localStorage.getItem("theme")));
+      setTheme(window.localStorage.getItem("theme")??"light");
     }else{
       setTheme("light")
     }},[]);

@@ -31,11 +31,12 @@ import { useCustomToasts } from '@/hooks/use-custom-toasts'
 
 export function ProfileInfo({Profile,session,friends}:ProfileInfoProps){
   const { theme,setTheme } = useTheme();
-  if (typeof window !== 'undefined') {
-    setTheme(window.localStorage.getItem("theme")??"light");
-  }else{
-    setTheme("light")
-  }
+  React.useEffect(()=>{
+    if (typeof window !== 'undefined') {
+      setTheme(window.localStorage.getItem("theme")??"light");
+    }else{
+      setTheme("light")
+    }},[]);
   const { loginToast } = useCustomToasts()
   const [sendIcon,setSendIcon]=React.useState(Icons.friendRequestSend)
   const textColorClass = theme === 'dark' ? 'text-white' : 'text-black';

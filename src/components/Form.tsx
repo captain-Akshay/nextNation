@@ -6,7 +6,7 @@ import "@uploadthing/react/styles.css";
 import Link from "next/link";
 import { useTheme } from 'next-themes';
 import { OurFileRouter } from "@/app/api/uploadthing/core";
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { Button } from "./ui/Button";
 
 interface FormProps {
@@ -25,11 +25,12 @@ const Form: React.FC<FormProps> = ({ type, post, setPost, submitting, handleSubm
   const { theme,setTheme } = useTheme();
 
   const[upload,setUpload]=useState(false);
-  if (typeof window !== 'undefined') {
-    setTheme(window.localStorage.getItem("theme")??"light");
-  }else{
-    setTheme("light")
-  }
+  useEffect(()=>{
+    if (typeof window !== 'undefined') {
+      setTheme(window.localStorage.getItem("theme")??"light");
+    }else{
+      setTheme("light")
+    }},[]);
   const isDarkTheme = theme === 'dark';
 
   const getGradientStyle = () => {

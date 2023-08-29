@@ -2,6 +2,7 @@
 import { useTheme } from 'next-themes';
 import { Avatar } from '../ui/Avatar';
 import Image from 'next/image';
+import { useEffect } from 'react';
 
 interface FriendsProviderProps {
     name:string|null,
@@ -11,11 +12,12 @@ interface FriendsProviderProps {
 
 function FriendsProvider({image,name,username}:FriendsProviderProps){
   const { theme,setTheme } = useTheme();
-  if (typeof window !== 'undefined') {
-    setTheme(window.localStorage.getItem("theme")??"light");
-  }else{
-    setTheme("light")
-  }
+  useEffect(()=>{
+    if (typeof window !== 'undefined') {
+      setTheme(window.localStorage.getItem("theme")??"light");
+    }else{
+      setTheme("light")
+    }},[]);
 
   const backgroundColor = theme === 'dark' ? 'bg-gray-900' : 'bg-white';
   const textColor = theme === 'dark' ? 'text-white' : 'text-gray-900';

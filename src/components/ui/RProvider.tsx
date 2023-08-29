@@ -5,6 +5,7 @@ import { format } from 'date-fns';
 import { buttonVariants } from "./Button";
 import ToFeedButton from "../ToFeedButton";
 import { useTheme } from "next-themes";
+import { useEffect } from "react";
 export default function RProvider({subreddit,memberCount,slug,children,session,isSubscribed}: {
     subreddit:any,
     memberCount:number,
@@ -14,11 +15,12 @@ export default function RProvider({subreddit,memberCount,slug,children,session,i
     session:any,
   }){
     const { theme,setTheme } = useTheme();
-    if (typeof window !== 'undefined') {
-      setTheme(window.localStorage.getItem("theme")??"light");
-    }else{
-      setTheme("light")
-    }
+    useEffect(()=>{
+      if (typeof window !== 'undefined') {
+        setTheme(window.localStorage.getItem("theme")??"light");
+      }else{
+        setTheme("light")
+      }},[]);
     // Set colors based on the current theme
     const textColor = theme === 'dark' ? 'text-white' : 'text-black';
     const bgColor = theme === 'dark' ? 'bg-black' : 'border-zinc-300';

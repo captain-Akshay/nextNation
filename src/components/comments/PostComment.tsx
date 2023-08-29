@@ -8,7 +8,7 @@ import { useMutation } from '@tanstack/react-query'
 import axios from 'axios'
 import { MessageSquare } from 'lucide-react'
 import { useRouter } from 'next/navigation'
-import { FC, useRef, useState } from 'react'
+import { FC, useEffect, useRef, useState } from 'react'
 import CommentVotes from '../CommentVotes'
 import { UserAvatar } from '../UserAvatar'
 import { Button } from '../ui/Button'
@@ -36,11 +36,12 @@ const PostComment: FC<PostCommentProps> = ({
   postId,
 }) => {
   const { theme,setTheme } = useTheme();
-  if (typeof window !== 'undefined') {
-    setTheme(window.localStorage.getItem("theme")??"light");
-  }else{
-    setTheme("light")
-  }
+  useEffect(()=>{
+    if (typeof window !== 'undefined') {
+      setTheme(window.localStorage.getItem("theme")??"light");
+    }else{
+      setTheme("light")
+    }},[]);
   const { data: session } = useSession();
   const [isReplying, setIsReplying] = useState<boolean>(false);
   const commentRef = useRef<HTMLDivElement>(null);

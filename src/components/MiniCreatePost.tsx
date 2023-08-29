@@ -14,11 +14,12 @@ interface MiniCreatePostProps {
 
 const MiniCreatePost: FC<MiniCreatePostProps> = ({ session }) => {
   const { theme, setTheme } = useTheme();
-  if (typeof window !== 'undefined') {
-    setTheme(window.localStorage.getItem("theme")??"light");
-  }else{
-    setTheme("light")
-  }
+  useEffect(()=>{
+    if (typeof window !== 'undefined') {
+      setTheme(window.localStorage.getItem("theme")??"light");
+    }else{
+      setTheme("light")
+    }},[]);
   // Set colors based on the current theme
   const greenColor = theme === 'dark' ? 'bg-green-500' : 'bg-green-300';
   const outlineColor = theme === 'dark' ? 'outline-white' : 'outline-black';
