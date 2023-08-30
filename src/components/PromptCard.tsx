@@ -6,10 +6,19 @@ import tick from "@/icons/tick.svg";
 import copy from "@/icons/copy.svg";
 import { useTheme } from "next-themes";
 import { formatTimeToNow } from "@/lib/utils";
+import ImageModal from "./ui/ImageModal";
 
 const PromptCard = ({ post }: { post: Prompt }) => {
   const [copied, setCopied] = useState('');
   const { theme,setTheme } = useTheme();
+  const [modalOpen, setModalOpen] = useState(false);
+  const openModal = () => {
+    setModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalOpen(false);
+  };
   const Tags=post.tags.split("#")
   useEffect(()=>{
     if (typeof window !== 'undefined') {
@@ -17,9 +26,7 @@ const PromptCard = ({ post }: { post: Prompt }) => {
     }else{
       setTheme("light")
     }},[]);
-  const handleProfileClick = () => {
-    // Implement your logic for handling profile clicks
-  };
+
 
   const handleCopy = () => {
     setCopied(post.body);
@@ -30,20 +37,14 @@ const PromptCard = ({ post }: { post: Prompt }) => {
   return (
     <div className={`prompt_card bg-${theme === "dark" ?"gray-800":"white" } rounded-lg p-4 border border-white my-3`}>
       <div className='flex justify-between items-start gap-5'>
-        {/* Profile section (not implemented) */}
         <div
-          className='flex-1 flex justify-start items-center gap-3 cursor-pointer'
-          onClick={handleProfileClick}
-        >
-          {/* Profile content */}
+          className='flex-1 flex justify-start items-center gap-3 cursor-pointer'>
           <div className={`max-h-40 mt-1 text-xs`}>
             <span>Posted by u/{post.authorId}</span>{' '}
             {formatTimeToNow(new Date(post.createdAt))}
           </div>
         </div>
-        {/* Copy button section */}
         <div className='copy_btn' onClick={handleCopy}>
-          {/* Show 'tick' icon if prompt has been copied, otherwise show 'copy' icon */}
           <Image
             src={copied === post.body ? tick : copy}
             alt={copied === post.body ? "tick_icon" : "copy_icon"}
@@ -52,29 +53,12 @@ const PromptCard = ({ post }: { post: Prompt }) => {
           />
         </div>
       </div>
-      {post.image.length>0&&<Image alt="PROMPT RESULT" src={post.image} width={200} height={200} />}
-      {/* Display the prompt body text */}
+      {post.image.length>0&&<Image alt="PROMPT RESULT" src={post.image} width={300} height={200} onClick={openModal} />}
       <p className={`my-4 font-satoshi text-sm text-${theme === "dark" ? "white":"black"}`}>{post.body}</p>
-
-      {/* Display the prompt tags */}
+      {modalOpen && <ImageModal imageUrl={post.image} onClose={closeModal} />}
       {Tags.map((item,index)=>{
         return <span className={`inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2`} key={index}>#{item}</span>
       })}
-
-      {/* {session?.user.id === post.creator._id && pathName === "/profile" && (
-        <div className='mt-5 flex-center gap-4 border-t border-gray-100 pt-3'>
-          <p
-            className='font-inter text-sm green_gradient cursor-pointer'
-          >
-            Edit
-          </p>
-          <p
-            className='font-inter text-sm orange_gradient cursor-pointer'
-          >
-            Delete
-          </p>
-        </div>
-      )} */}
     </div>
   );
 };
