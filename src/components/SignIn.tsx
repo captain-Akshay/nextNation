@@ -33,7 +33,9 @@ const SignIn = () => {
       </div>
       <div className="md:w-1/2 flex flex-col justify-center text-center">
         <div className="flex flex-col items-center justify-center md:justify-start">
-          <Icons.logo className="h-6 w-6" />
+          <div className='h-10 w-10'>
+          <Icons.logo/>
+          </div>
           <h1 className={`text-2xl font-semibold tracking-tight ml-2 ${containerClass}`}>Welcome back</h1>
           <div className="mt-2 text-center">
             <p className={`text-sm max-w-xs ${containerClass}`}>
