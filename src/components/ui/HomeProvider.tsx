@@ -14,7 +14,7 @@ export default function HomeProvider({children}: {
     const backgroundColor = theme === "dark" ? 'bg-black' : 'bg-zinc-100';
     return(
 
-        <div className={`min-h-screen ${backgroundColor}`}>
+        <div className={` min-h-screen ${backgroundColor}`}>
         {children}
         </div>
     )

@@ -24,7 +24,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang='en' className={cn("bg-zinc-100 text-slate-900 antialiased light",inter.className)}>
-      <body className='min-h-screen bg-zinc-100 antialiased'>
+      <body className='min-h-max bg-zinc-100 antialiased'>
         <ThemePro>
           <Providers>
           <HomeProvider>

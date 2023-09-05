@@ -44,7 +44,7 @@ const Form: React.FC<FormProps> = ({ type, post, setPost, submitting, handleSubm
   return (
     <section className={`w-full max-w-full flex-start flex-col mt-14 ${getGradientStyle()} p-10 rounded-xl`}>
       <h1 className={`head_text text-left ${isDarkTheme ? 'text-white' : 'text-black'}`}>
-        <span className='blue_gradient text-3xl font-bold'>{type} Post</span>
+        <span className='blue_gradient text-3xl font-bold'>{type} Prompt</span>
       </h1>
       <p className={`desc text-left max-w-md text-lg ${isDarkTheme ? 'text-white' : 'text-black'}`}>
         {type} and share amazing prompts with the world, and let your
