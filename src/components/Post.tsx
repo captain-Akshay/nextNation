@@ -57,9 +57,9 @@ const Post: FC<PostProps> = ({
               <>
                 <Link
                   className={`underline ${linkColor} text-sm underline-offset-2`}
-                  href={`/r/${subredditName}`}
+                  href={`/c/${subredditName}`}
                 >
-                  r/{subredditName}
+                  c/{subredditName}
                 </Link>
                 <span className='px-1'>•</span>
               </>
@@ -71,7 +71,7 @@ const Post: FC<PostProps> = ({
                 href={`/u/${post.author.username}`}> u/{post.author.username} </Link></span>{' '}
             {formatTimeToNow(new Date(post.createdAt))}
           </div>
-          <Link href={`/r/${subredditName}/post/${post.id}`}>
+          <Link href={`/c/${subredditName}/post/${post.id}`}>
             <h1 className={`text-lg font-semibold py-2 leading-6 ${textColor}`}>
               {post.title}
             </h1>
@@ -92,7 +92,7 @@ const Post: FC<PostProps> = ({
 
       <div className={`${bgColor} z-20 text-sm px-4 py-4 sm:px-6`}>
         <Link
-          href={`/r/${subredditName}/post/${post.id}`}
+          href={`/c/${subredditName}/post/${post.id}`}
           className='w-fit flex items-center gap-2'
         >
           <MessageSquare className={`h-4 w-4 ${textColor}`} /> {commentAmt} comments

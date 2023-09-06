@@ -67,8 +67,8 @@ const SearchBar: FC<SearchBarProps> = ({}) => {
 
   const handleValueChange = (text: string) => {
     setInput(text);
-    if (text.startsWith('/r')) {
-      setPrefix('/r');
+    if (text.startsWith('/c')) {
+      setPrefix('/c');
       setInput("");
     } else if (text.startsWith('/u')) {
       setPrefix('/u');
@@ -100,14 +100,14 @@ const SearchBar: FC<SearchBarProps> = ({}) => {
         onValueChange={handleValueChange}
         value={input}
         className='outline-none border-none focus:border-none focus:outline-none ring-0'
-        placeholder={prefix?"":"Search communities (/r) or users (/u)..."}
+        placeholder={prefix?"":"Search communities (/c) or users (/u)..."}
       />
       </div>
       {input.length > 0 && (
         <CommandList className={`absolute top-full inset-x-0 shadow rounded-b-md ${commandListBgColor}`}>
           {isFetched && <CommandEmpty>No results found.</CommandEmpty>}
           {(queryResults?.length ?? 0) > 0 ? (
-            <CommandGroup heading={prefix==='/r'?'Communities':'Users'}>
+            <CommandGroup heading={prefix==='/c'?'Communities':'Users'}>
               {queryResults?.map((item) => {
                 return <CommandItem
                   onSelect={(e) => {

@@ -21,7 +21,7 @@ const CommunityCard: FC<CommunityCardProps> = ({itemname,created,creator,id}) =>
         setTheme("light")
       }},[]);
     return (
-        <Link href={`/r/${itemname}`}>
+        <Link href={`/c/${itemname}`}>
         <div
         className={`max-w-sm rounded overflow-hidden shadow-lg transform hover:scale-110 transition-transform duration-300 ease-in-out`}>
           <Image

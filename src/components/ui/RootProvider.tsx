@@ -28,7 +28,7 @@ function HomeCard({ bgColor, textColor, hoverBgColor, hoverTextColor }: CardProp
             Your personal Breadit frontpage. Come here to check in with your favorite communities.
           </p>
         </div>
-        <Link href={`/r/create`} legacyBehavior>
+        <Link href={`/c/create`} legacyBehavior>
           <a
             className={`
               ${buttonVariants({
