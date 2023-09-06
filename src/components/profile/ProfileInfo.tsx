@@ -99,7 +99,7 @@ export function ProfileInfo({Profile,session,friends}:ProfileInfoProps){
 
   return<>
     <div className={`mx-auto flex w-96 flex-col justify-center ${bgColor} rounded-2xl shadow-xl shadow-slate-300/60`}>
-    <Image className="aspect-video w-70 rounded-t-2xl object-cover object-center" src={Profile?.image??noImg} alt="profile pic" width={1000} height={1000}/>
+    <Image className="aspect-video w-70 rounded-t-2xl object-cover object-center" src={Profile?.image??noImg} alt="profile pic" width={1000} height={1000} quality={100}/>
     <CardTitle className={` pt-4 pr-4 pl-4 ${textColorClass}`}>{Profile?.name}</CardTitle>
         <p className={`text-sm font-light pl-6 pb-4 ${textColorClass}`}>u/{Profile?.username}</p>
         <CardDescription className={`pl-4 ${textColorClass}`}>URverse user available to Connect!</CardDescription>

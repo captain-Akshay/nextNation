@@ -5,7 +5,7 @@ import type { Session } from 'next-auth'
 import FriendsList from "@/components/profile/FriendsList"
 import JoinedReddit from "@/components/profile/JoinedReddit"
 import { notFound } from "next/navigation"
-import UpdatedProfileFeed from "@/components/profile/UpdatedProfileFeed"
+import CustomFeed from "@/components/homepage/CustomFeed"
 interface ProfileProps {
     params:{
         slug:string
@@ -39,7 +39,7 @@ async function page({params}:ProfileProps){
 </div>
 <div className="w-full lg:w-2/4 lg:mx-auto">
 {/* @ts-ignore */}
-<UpdatedProfileFeed/>
+<CustomFeed />
 {/* <ProfilePostFeed id={Person?.id} /> */}
 </div>
 <div className="w-full lg:w-1/4 lg:ml-4 mt-8 lg:mt-0 flex flex-col space-y-8"> 
