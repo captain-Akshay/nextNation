@@ -27,3 +27,5 @@ Note: If you are already running a webserver on port 80 (e.g. Macs usually have 
 If you configure a .env file over to '.env.example' and fill in the options) you can configure a range of options.
 
 to Generate security key :- openssl rand -base64 64 | 128
+
+Postgress sql is needed 
