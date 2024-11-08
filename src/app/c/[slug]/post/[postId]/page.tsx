@@ -46,7 +46,7 @@ const SubRedditPostPage = async ({ params }: SubRedditPostPageProps) => {
         <Suspense fallback={<PostVoteShell />}>
           {/* @ts-expect-error server component */}
           <PostVoteServer
-            postId={post?.id ?? cachedPost.id}
+            postId={post?.id || ""}
             getData={async () => {
               return await db.post.findUnique({
                 where: {
@@ -60,7 +60,7 @@ const SubRedditPostPage = async ({ params }: SubRedditPostPageProps) => {
           />
         </Suspense>
         <PostProviderSub post={post} cachedPost={cachedPost}>
-          <EditorOutput content={post?.content ?? cachedPost.content} />
+          <EditorOutput content={post?.content} />
           <Suspense
             fallback={
               <Loader2 className="h-5 w-5 animate-spin text-zinc-500" />
