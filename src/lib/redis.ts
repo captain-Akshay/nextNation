@@ -1,6 +1,5 @@
-import { Redis } from '@upstash/redis'
+import { createClient } from "@supabase/supabase-js";
 
-export const redis = new Redis({
-  url: process.env.REDIS_URL!,
-  token: process.env.REDIS_SECRET!,
-})
+const supabaseUrl = "https://kezdunxrhifsrbkbglgg.supabase.co";
+const supabaseKey = process.env.SUPABASE_KEY || "";
+export const supabase = createClient(supabaseUrl, supabaseKey);
