@@ -3,7 +3,7 @@ import EditorOutput from "@/components/EditorOutput";
 import PostVoteServer from "@/components/post-vote/PostVoteServer";
 import { db } from "@/lib/db";
 // import { redis } from '@/lib/redis'
-// import { CachedPost } from "@/types/redis";
+import { CachedPost } from "@/types/redis";
 import { Post, User, Vote } from "@prisma/client";
 import { Loader2 } from "lucide-react";
 import { notFound } from "next/navigation";
